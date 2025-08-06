@@ -1,0 +1,15 @@
+rootProject.name = "Daar"
+
+
+//modules
+include 'core'
+    project (':core').projectDir = file('modules/core')
+
+include 'ui'
+    project (':ui').projectDir = file('modules/ui')
+
+include 'persistence'
+    project (':persistence').projectDir = file('modules/persistence')
+
+include 'bootstrap'
+    project(':bootstrap').projectDir = file('modules/bootstrap')
