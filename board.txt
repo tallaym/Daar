@@ -1,10 +1,8 @@
 >>> Mardi 05 Aout 2025
-
 > Base de données (Daar/sql): 
     + Première proposition postgre pour les utilisateurs (users), biens immobiliers (estates), contrats (contracts)
      paiements (payments), documents et autorisations(auth). 
     - à rajouter pagination, index, vues
-
 > Java : 
     + Initialisation d'un projet avec Gradle comme outil de build et JavaFx pour les graphiques
     + Structure hexagonale avec modules core (ports), persistence (adapters), ui et bootstrap pour les
@@ -15,3 +13,10 @@
 
 
 >>> Mercredi 06 Aout 2025
+> Java :
+    + refactorisation des Java Platform Module Service qui étaient mal configurés
+    + builds revus et simplifiés : dependances superflues, subprojects
+
+
+
+>>> Jeudi 07 Aout 2025

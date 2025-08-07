@@ -1,0 +1,18 @@
+plugins {
+    id 'org.openjfx.javafxplugin'
+}
+
+javafx {
+    version = rootProject.ext.javafxVersion
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+dependencies {
+    implementation project(':core')
+    implementation 'org.controlsfx:controlsfx:11.1.2'
+    implementation 'com.dlsc.formsfx:formsfx-core:11.6.0'
+}
+
+java {
+    modularity.inferModulePath = true
+}

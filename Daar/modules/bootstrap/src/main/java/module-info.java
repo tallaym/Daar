@@ -1,7 +1,7 @@
-module com.daar.ui {
+module com.daar.bootstrap {
 
+    requires com.daar.ui;
     requires com.daar.core;
     requires javafx.controls;
     requires javafx.fxml;
-    opens com.daar.controller to javafx.fxml;
 }
