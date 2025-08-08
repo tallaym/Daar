@@ -4,4 +4,5 @@ module com.daar.ui {
     requires javafx.controls;
     requires javafx.fxml;
     opens com.daar.controller to javafx.fxml;
+    opens com.daar.controller.boot to javafx.fxml;
 }
