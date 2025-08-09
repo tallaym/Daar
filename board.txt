@@ -8,7 +8,7 @@
     + Structure hexagonale avec modules core (ports), persistence (adapters), ui et bootstrap pour les
     besoins graphiques et de logique de la solution
     + Config des modules dans settings
-    - compléter les build
+    - compléter les build [résolu]
 
 
 
@@ -20,3 +20,13 @@
 
 
 >>> Jeudi 07 Aout 2025
+> UI : 
+    + interfaces de connexion et de boot 
+    - interface de modification de mot de passe en attente
+    - scenario de first boot
+
+
+>>> Vendredi 08 Aout 2025
+> UI : 
+    + Structure du Dashboard 
+    - remplir les onglets liés
