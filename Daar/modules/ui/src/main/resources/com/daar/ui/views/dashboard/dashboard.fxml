@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -13,21 +14,12 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label alignment="TOP_LEFT" text="Bienvenue  " />
                   <Label text="nom" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
-               <children>
-                <Button mnemonicParsing="false" text="EMPLOYES" />
-                  <Button mnemonicParsing="false" text="CLIENTS" />
-                  <Button mnemonicParsing="false" text="PROPRIETES" />
-                  <Button mnemonicParsing="false" text="PAIEMENTS" />
                </children>
             </HBox>
             <Label alignment="CENTER" contentDisplay="CENTER" text="DASHBOARD" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
@@ -41,6 +33,19 @@
       </GridPane>
    </top>
    <center>
-      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TilePane hgap="5.0" prefColumns="4" prefHeight="200.0" prefRows="1" prefTileHeight="300.0" prefTileWidth="140.0" prefWidth="120.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="200.0" prefWidth="120.0" />
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+            <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+            <Pane layoutX="210.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </TilePane>
    </center>
 </BorderPane>

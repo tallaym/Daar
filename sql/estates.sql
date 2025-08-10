@@ -10,11 +10,12 @@ CREATE TABLE IF NOT EXISTS address (
     id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
  
     lot             VARCHAR(10),       -- plot or lot number
-    street          VARCHAR(30),       -- street name
-    description     VARCHAR(255),              -- full address text (optional)
+    road            VARCHAR(30),       -- street name
+    description     VARCHAR(255),
+    suburb          VARCHAR(50),              -- full address text (optional)
     postal_code     VARCHAR(10),
     town            VARCHAR(50) NOT NULL,
-    region          VARCHAR(50),
+    state           VARCHAR(50),
     country         VARCHAR(50) NOT NULL,
     longitude       NUMERIC(9,6) DEFAULT NULL,      -- optional geolocation
     latitude        NUMERIC(9,6) DEFAULT NULL,
