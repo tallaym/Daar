@@ -15,4 +15,7 @@ module com.daar.ui {
     opens com.daar.controller.dashboard to javafx.fxml;
     opens com.daar.controller.dashboard.staff to javafx.fxml;
     opens com.daar.controller.dashboard.estates to javafx.fxml;
+    opens com.daar.controller.dashboard.staff.role to javafx.fxml;
+    opens com.daar.controller.dashboard.staff.employee to javafx.fxml;
+    opens com.daar.controller.dashboard.staff.permission to javafx.fxml;
 }

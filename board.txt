@@ -1,3 +1,5 @@
+>>>>> JOURNAL 
+
 >>> Mardi 05 Aout 2025
 > Base de données (Daar/sql): 
     + Première proposition postgre pour les utilisateurs (users), biens immobiliers (estates), contrats (contracts)
@@ -34,3 +36,10 @@
 >>> Dimanche 10 Aout 2025
 > UI : 
     ++ Dashboard
+
+>>> Défaillance matériel <<<
+
+>>> Jeudi 14 Aout 2025
+> UI :
+    + Dashboard responsive (revu) : staff
+    - estates 
