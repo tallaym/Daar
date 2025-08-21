@@ -67,7 +67,6 @@
       <TextField layoutX="90.0" layoutY="191.0" GridPane.columnIndex="4" GridPane.rowIndex="10" />
       <TextField layoutX="90.0" layoutY="212.0" GridPane.columnIndex="4" GridPane.rowIndex="11" />
       <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" GridPane.rowSpan="2" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
       <ChoiceBox prefWidth="150.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
@@ -75,5 +74,6 @@
       <Button mnemonicParsing="false" text="VALIDER" GridPane.columnIndex="5" GridPane.rowIndex="12" />
       <Label layoutX="10.0" layoutY="320.0" text="Pays" GridPane.rowIndex="9" />
       <TextField layoutX="110.0" layoutY="316.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <ChoiceBox layoutX="410.0" layoutY="134.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
    </children>
 </GridPane>

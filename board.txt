@@ -43,3 +43,8 @@
 > UI :
     + Dashboard responsive (revu) : staff
     - estates 
+
+>>> Jeudi 21 Aout 2025
+> UI : 
+    ++ dashboard 
+    - les resumes des dashboards
