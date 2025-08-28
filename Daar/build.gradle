@@ -21,9 +21,6 @@ ext {
   javafxVersion = '21'
 }
 
-
-
-
 subprojects {
   apply plugin: 'java'
 

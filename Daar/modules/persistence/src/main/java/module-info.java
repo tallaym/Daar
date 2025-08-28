@@ -1,5 +1,5 @@
-module com.daar.persistence {
-    requires com.daar.core;
+module persistence {
+    requires core;
 
    /* exports com.daar.persistence.repository;*/
 }

@@ -5,11 +5,10 @@ rootProject.name = "Daar"
 include 'core'
     project (':core').projectDir = file('modules/core')
 
-include 'ui'
-    project (':ui').projectDir = file('modules/ui')
+include 'application'
+    project (':application').projectDir = file('modules/application')
 
 include 'persistence'
     project (':persistence').projectDir = file('modules/persistence')
 
-include 'bootstrap'
-    project(':bootstrap').projectDir = file('modules/bootstrap')
+

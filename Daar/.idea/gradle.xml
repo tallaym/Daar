@@ -5,13 +5,21 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="C:/gradle/gradle-8.14.2" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/modules/bootstrap" />
+            <option value="$PROJECT_DIR$/modules/application" />
             <option value="$PROJECT_DIR$/modules/core" />
             <option value="$PROJECT_DIR$/modules/persistence" />
-            <option value="$PROJECT_DIR$/modules/ui" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/application" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/application" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -33,16 +33,14 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS user_profiles (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    user_id         UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    
+
     profile_key     VARCHAR(30) NOT NULL,
     profile_value   VARCHAR(30),
 
     created_at      TIMESTAMPTZ DEFAULT now() NOT NULL,
     updated_at      TIMESTAMPTZ DEFAULT now() NOT NULL,
 
-    created_by       UUID REFERENCES users(id) NOT NULL ON DELETE CASCADE,   
-    updated_by       UUID REFERENCES users(id),
+    
 
     UNIQUE (user_id, profile_key)
 );

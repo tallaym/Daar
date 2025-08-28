@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS roles (
 CREATE TABLE IF NOT EXISTS permissions (
     id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
-    permission_name       VARCHAR(50) NOT NULL,
+    permission_name VARCHAR(50) NOT NULL,
     description     VARCHAR(255),
         
     created_at		TIMESTAMPTZ DEFAULT now() NOT NULL,
