@@ -1,6 +1,13 @@
 package com.daar.core.model.auth;
 
+import com.daar.core.model.auth.permission.Role;
+import com.daar.core.model.auth.permission.UseRole;
+import com.daar.core.model.auth.permission.UserPermission;
+import com.daar.core.model.document.Document;
+
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,6 +31,11 @@ public class User {
     private UUID updatedBy;
     private UUID suspendedBy;
 
+    private List<Credential> myCredentials;
+    private List<UseRole> myRoles;
+    private List<UserPermission> myPermissions;
+    private List<Document> myDocuments;
+
 
     public enum IdentityType {
         CNI, PASSEPORT, PERMIS, SEJOUR
@@ -43,6 +55,28 @@ public class User {
     }
 
     //constructeur complet
+    public User(UUID id, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String adress, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy, List<Credential> myCredentials, List<UseRole> myRoles, List<UserPermission> myPermissions, List<Document> myDocuments) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.origin = origin;
+        this.identityType = identityType;
+        this.identityNumber = identityNumber;
+        this.adress = adress;
+        this.email = email;
+        this.phone = phone;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.suspendedUntil = suspendedUntil;
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+        this.suspendedBy = suspendedBy;
+        this.myCredentials = myCredentials;
+        this.myRoles = myRoles;
+        this.myPermissions = myPermissions;
+        this.myDocuments = myDocuments;
+    }
+
     public User(UUID id, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String adress, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
         this.firstname = firstname;
@@ -59,12 +93,13 @@ public class User {
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.suspendedBy = suspendedBy;
-
+        this.myCredentials = new ArrayList<>();
+        this.myRoles = new ArrayList<>();
+        this.myPermissions = new ArrayList<>();
+        this.myDocuments = new ArrayList<>();
     }
 
-
-
-        public UUID getId() {
+    public UUID getId() {
             return id;
         }
 
@@ -184,5 +219,35 @@ public class User {
             this.createdBy = createdBy;
         }
 
+    public List<Credential> getMyCredentials() {
+        return myCredentials;
+    }
 
+    public void setMyCredentials(List<Credential> myCredentials) {
+        this.myCredentials = myCredentials;
+    }
+
+    public List<UseRole> getMyRoles() {
+        return myRoles;
+    }
+
+    public void setMyRoles(List<UseRole> myRoles) {
+        this.myRoles = myRoles;
+    }
+
+    public List<UserPermission> getMyPermissions() {
+        return myPermissions;
+    }
+
+    public void setMyPermissions(List<UserPermission> myPermissions) {
+        this.myPermissions = myPermissions;
+    }
+
+    public List<Document> getMyDocuments() {
+        return myDocuments;
+    }
+
+    public void setMyDocuments(List<Document> myDocuments) {
+        this.myDocuments = myDocuments;
+    }
 }

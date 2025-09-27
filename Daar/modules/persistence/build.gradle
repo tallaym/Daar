@@ -4,6 +4,8 @@ plugins {
 
 dependencies {
     implementation project(':core')
+
+    implementation 'org.postgresql:postgresql:42.6.0';
 }
 
 java {

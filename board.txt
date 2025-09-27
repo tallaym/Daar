@@ -48,3 +48,25 @@
 > UI : 
     ++ dashboard 
     - les resumes des dashboards
+
+
+>>> Mercredi 27/08/25
+> UI : 
+    - abandon de JavaFx. Conception certes complète mais trop de bugs! 
+    + nouvelle architecture avec ui et bootstrap off, app in 
+
+> Core : 
+    + package permission(user, permissions et role)
+    - package activité et mdp à compléter 
+
+
+>>> Jeudi 28/09/25
+Bascule vers une appli backend avec architecture ports/adapters
+
+> Core : 
+    + configuration de base complète avec les classes, interfaces drivng et driven
+
+> Persistence :
+    + JDBC : immédiat
+    + ORM : plus tard
+
