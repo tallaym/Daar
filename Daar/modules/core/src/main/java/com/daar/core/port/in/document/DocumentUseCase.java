@@ -9,7 +9,6 @@ public interface DocumentUseCase {
 
     UUID createDocument(Document doc);
     Document updateDocument(UUID id, Document doc);
-    boolean deleteDocument(UUID id);
     Document getDocumentById(UUID id);
     List<Document> listDocuments();
     List<Document> listSub(UUID id);

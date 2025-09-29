@@ -18,6 +18,10 @@ public class Document {
     private Instant updatedAt;
     private UUID typeId;
 
+
+    public Document() {
+    }
+
     public Document(String docName, String docFormat, String storageType, String storagePath, boolean isSensitive, UUID createdBy, UUID typeId) {
         this.docName = docName;
         this.docFormat = docFormat;

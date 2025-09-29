@@ -10,9 +10,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PermissionRepository {
-    Permission save(Permission permission);
+    Permission insert(Permission permission);
+    Permission update(Permission permission);
     Optional<Permission> findById(UUID id);
-    boolean deleteById(UUID id);
+
+
     List<Permission> allPermissions();
 
 

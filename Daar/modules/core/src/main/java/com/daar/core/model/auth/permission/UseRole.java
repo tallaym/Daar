@@ -15,6 +15,9 @@ public class UseRole {
     private Instant expiresAt;
 
 
+    public UseRole() {
+    }
+
     public UseRole(UUID userId, UUID roleId, UUID createdBy, Instant expiresAt) {
         this.id = UUID.randomUUID();
         this.userId = userId;

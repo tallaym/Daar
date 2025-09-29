@@ -24,13 +24,15 @@ public class Credential {
         OAUTH
     }
 
+    public Credential(){
+
+    }
     public Credential(UUID userId, CredentialType type, String identifier, String secret, Instant expiresAt) {
         this.id = UUID.randomUUID();
         this.userId = userId;
         this.type = type;
         this.identifier = identifier;
         this.secret = secret;
-        this.createdAt = Instant.now();
         this.expiresAt = expiresAt;
     }
 

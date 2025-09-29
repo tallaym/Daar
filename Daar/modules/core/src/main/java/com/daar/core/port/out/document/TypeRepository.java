@@ -8,7 +8,8 @@ import java.util.UUID;
 
 public interface TypeRepository {
 
-    Type save(Type type);
+    Type insert(Type type);
+    Type update(Type type);
     Optional<Type> findById(UUID id);
     void deleteById(UUID id);
     List<Type> findAll();

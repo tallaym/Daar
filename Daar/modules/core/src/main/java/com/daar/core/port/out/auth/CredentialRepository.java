@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CredentialRepository {
-    Credential save(Credential credential);
+    Credential insert(Credential credential);
+
+    Credential update(Credential cr);
     List<Credential> findByUserId(UUID userId);
+
 }

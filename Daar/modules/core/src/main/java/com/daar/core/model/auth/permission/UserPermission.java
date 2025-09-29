@@ -15,6 +15,9 @@ public class UserPermission {
     private Instant expiresAt;
 
 
+    public UserPermission() {
+    }
+
     public UserPermission(UUID userId, UUID permissionId, UUID createdBy, Instant expiresAt) {
         this.id = UUID.randomUUID();
         this.userId = userId;

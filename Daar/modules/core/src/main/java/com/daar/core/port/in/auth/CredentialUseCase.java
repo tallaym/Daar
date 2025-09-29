@@ -9,6 +9,5 @@ public interface CredentialUseCase {
 
     UUID createCredential(Credential mdp);
     Credential updateCredential(Credential mdp);
-    Credential deleteCredential(UUID mdpId);
 
 }

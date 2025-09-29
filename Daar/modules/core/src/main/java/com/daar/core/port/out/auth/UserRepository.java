@@ -8,7 +8,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
-    User save(User user);
+    User insert(User user);
+    User update(User user);
+    User activate(User u);
     Optional<User> findById(UUID id);
     List<User> findAll();
     List<User> findAddedAfter(Date start);

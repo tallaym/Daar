@@ -70,3 +70,14 @@ Bascule vers une appli backend avec architecture ports/adapters
     + JDBC : immédiat
     + ORM : plus tard
 
+>>> Lundi 29/09/25
+Focus sur les classes de base : user, mdp, document et permissions
+
+> Peristence :
+    On est sur du JDBC et les adapters de base sont definis
+    - naming, le delete/active
+
+> Application à suivre
+
+
+>>> Mardi 30/09/2025

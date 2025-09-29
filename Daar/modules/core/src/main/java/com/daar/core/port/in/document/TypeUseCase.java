@@ -10,7 +10,7 @@ public interface TypeUseCase {
 
     UUID createTypeDoc(Type t);
     Type updateTypeDoc(UUID id, Type type);
-    boolean deleteTypeDoc(UUID id);
+    Type deleteTypeDoc(UUID id);
     Type getTypeById(UUID id);
     List<Type> listTypeDoc();
 }

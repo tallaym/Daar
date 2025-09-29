@@ -11,13 +11,16 @@ public class Permission {
         private String description;
         private Instant createdAt;
         private Instant updatedAt;
-        private Instant deletedAt;
         private UUID createdBy;
         private UUID updatedBy;
         private UUID roleId;
 
 
-        public Permission(String name, String description, UUID createdBy) {
+    public Permission() {
+
+    }
+
+    public Permission(String name, String description, UUID createdBy) {
             this.id = UUID.randomUUID();
             this.permission_name = name;
             this.description = description;
@@ -25,13 +28,12 @@ public class Permission {
             this.createdBy = createdBy;
         }
 
-        public Permission(UUID id, String name, String description, Instant createdAt, Instant updatedAt, Instant deletedAt, UUID createdBy, UUID updatedBy, UUID roleId) {
+        public Permission(UUID id, String name, String description, Instant createdAt, Instant updatedAt, UUID createdBy, UUID updatedBy, UUID roleId) {
             this.id = id;
             this.permission_name = name;
             this.description = description;
             this.createdAt = createdAt;
             this.updatedAt = updatedAt;
-            this.deletedAt = deletedAt;
             this.createdBy = createdBy;
             this.updatedBy = updatedBy;
             this.roleId = roleId;
@@ -69,14 +71,6 @@ public class Permission {
 
         public void setUpdatedAt(Instant updatedAt) {
             this.updatedAt = updatedAt;
-        }
-
-        public Instant getDeletedAt() {
-            return deletedAt;
-        }
-
-        public void setDeletedAt(Instant deletedAt) {
-            this.deletedAt = deletedAt;
         }
 
         public UUID getCreatedBy() {

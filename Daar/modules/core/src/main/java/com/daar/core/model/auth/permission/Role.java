@@ -11,10 +11,12 @@ public class Role {
     private String description;
     private Instant createdAt;
     private Instant updatedAt;
-    private Instant deletedAt;
     private UUID createdBy;
     private UUID updatedBy;
 
+
+    public Role() {
+    }
 
     public Role(String rolename, String description, UUID createdBy) {
         this.id = UUID.randomUUID();
@@ -24,13 +26,12 @@ public class Role {
         this.createdBy = createdBy;
     }
 
-    public Role(UUID id, String rolename, String description, Instant createdAt, Instant updatedAt, Instant deletedAt, UUID createdBy, UUID updatedBy) {
+    public Role(UUID id, String rolename, String description, Instant createdAt, Instant updatedAt, UUID createdBy, UUID updatedBy) {
         this.id = id;
         this.rolename = rolename;
         this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
     }
@@ -73,14 +74,6 @@ public class Role {
 
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Instant getDeletedAt() {
-        return deletedAt;
-    }
-
-    public void setDeletedAt(Instant deletedAt) {
-        this.deletedAt = deletedAt;
     }
 
     public UUID getCreatedBy() {

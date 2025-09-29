@@ -14,6 +14,10 @@ public class Type {
     private Instant updatedAt;
     private Set<Document> ListDocument;
 
+
+    public Type() {
+    }
+
     public Type(String name, String description, UUID createdBy) {
         this.id = UUID.randomUUID();
         this.name = name;

@@ -13,7 +13,7 @@ public interface PermissionUseCase {
 
     UUID createPermission(Permission perm);
     Permission updatePermission(Permission perm);
-    boolean deletePermission(UUID id);
+    Permission deletePermission(UUID id);
     List<Permission> allPermissions();
 
     UserPermission changeTimeOut(User u, Permission perm, Date newdate);

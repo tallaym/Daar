@@ -19,9 +19,10 @@ public class User {
     private String origin = "Senegalese";
     private IdentityType identityType;
     private String identityNumber;
-    private String adress;
+    private String address;
     private String email;
     private String phone;
+    private boolean active;
 
     private Instant createdAt;
     private Instant updatedAt;
@@ -45,12 +46,12 @@ public class User {
     public User(){}
 
     //constructeur basique
-    public User(String firstname, String lastname, String phone) {
+    public User(String firstname, String lastname, String phone, UUID createdBy) {
         this.id = UUID.randomUUID();
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
-        this.createdAt = Instant.now();
+        this.createdBy = createdBy;
 
     }
 
@@ -62,7 +63,7 @@ public class User {
         this.origin = origin;
         this.identityType = identityType;
         this.identityNumber = identityNumber;
-        this.adress = adress;
+        this.address = adress;
         this.email = email;
         this.phone = phone;
         this.createdAt = createdAt;
@@ -77,14 +78,14 @@ public class User {
         this.myDocuments = myDocuments;
     }
 
-    public User(UUID id, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String adress, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
+    public User(UUID id, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String adress, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy, boolean active) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.origin = origin;
         this.identityType = identityType;
         this.identityNumber = identityNumber;
-        this.adress = adress;
+        this.address = adress;
         this.email = email;
         this.phone = phone;
         this.createdAt = createdAt;
@@ -97,6 +98,15 @@ public class User {
         this.myRoles = new ArrayList<>();
         this.myPermissions = new ArrayList<>();
         this.myDocuments = new ArrayList<>();
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public UUID getId() {
@@ -147,12 +157,12 @@ public class User {
             this.identityNumber = identityNumber;
         }
 
-        public String getAdress() {
-            return adress;
+        public String getAddress() {
+            return address;
         }
 
-        public void setAdress(String adress) {
-            this.adress = adress;
+        public void setAddress(String adress) {
+            this.address = adress;
         }
 
         public String getEmail() {

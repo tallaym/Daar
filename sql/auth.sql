@@ -35,14 +35,15 @@ CREATE TABLE IF NOT EXISTS credentials (
 
     user_id         UUID NOT NULL,
     type            VARCHAR(30) NOT NULL CHECK (type IN ('password', 'otp_seed', 'passkey', 'oauth')),
-    identifier      VARCHAR(30) TEXT,        -- ex: email, phone number, OAuth provider user id
+    identifier      VARCHAR(30),        -- ex: email, phone number, OAuth provider user id
     secret          VARCHAR(255),            -- mot de passe hashé, clé OTP, null si pas applicable
 
     created_at      TIMESTAMPTZ DEFAULT now() NOT NULL,
     updated_at      TIMESTAMPTZ DEFAULT now() NOT NULL,
-    expires_at      TIMESTAMPTZ DEFAULT now() NOT NULL,
+    expires_at      TIMESTAMPTZ,
 
-    UNIQUE (type, identifier)
+    UNIQUE (type, identifier),
+    UNIQUE (user_id, type)
 );
 
 

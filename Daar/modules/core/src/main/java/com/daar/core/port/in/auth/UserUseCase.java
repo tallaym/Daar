@@ -20,6 +20,8 @@ public interface UserUseCase {
     List<User> addedBetween(Date start, Date end);
     Optional<User> getUserById(UUID id);
 
+    User activate(User u);
+
 
     List<Document> documentsAddedBy(UUID id);
     List<Document> documentsLinkedTo(UUID id);

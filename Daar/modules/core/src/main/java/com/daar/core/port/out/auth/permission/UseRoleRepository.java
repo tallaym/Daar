@@ -9,8 +9,9 @@ import java.util.UUID;
 
 public interface UseRoleRepository {
 
-    UseRole save(UseRole ur);
-    boolean deletedById(UUID id);
+    UseRole insert(UseRole ur);
+    UseRole update(UseRole ur);
+
     List<UseRole> findUserRoles(UUID userId);
     List<UseRole> findRoleUsers(UUID roleId);
     List<UseRole> findAll();

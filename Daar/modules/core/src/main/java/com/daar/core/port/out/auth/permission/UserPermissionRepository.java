@@ -7,8 +7,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface UserPermissionRepository {
-    UserPermission save(UserPermission up);
-    boolean deleteById(UUID id);
+    UserPermission insert(UserPermission up);
+    UserPermission update(UserPermission up);
+
     List<UserPermission> findUserPermissions(UUID userId);
     List<UserPermission> findPermissionUses(UUID permissionId);
     List<UserPermission> findAll();

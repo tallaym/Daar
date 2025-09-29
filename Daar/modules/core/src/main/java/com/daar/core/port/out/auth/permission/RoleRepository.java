@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface RoleRepository {
-    Role save(Role role);
+    Role insert(Role role);
+    Role update(Role role);
+
     Optional<Role> findById(UUID id);
-    boolean deleteById(UUID id);
     List<Role> allRoles();
-    List<Permission> getAllPermissions(UUID roleId);
 
 }

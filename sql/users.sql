@@ -21,10 +21,10 @@ CREATE TABLE IF NOT EXISTS users (
     phone            VARCHAR(16) CHECK (phone ~ '^\+[1-9][0-9]{7,14}$'),
 
     created_at       TIMESTAMPTZ DEFAULT now() NOT NULL,
-    updated_at       TIMESTAMPTZ DEFAULT now() NOT NULL,
+    updated_at       TIMESTAMPTZ,
     suspended_until  TIMESTAMPTZ,
 
-    created_by       UUID REFERENCES users(id),   
+    created_by       UUID REFERENCES users(id) NOT NULL,   
     updated_by       UUID REFERENCES users(id),
     suspended_by     UUID REFERENCES users(id)
 );
