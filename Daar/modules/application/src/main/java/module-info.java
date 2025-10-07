@@ -1,4 +1,0 @@
-module persistence {
-    requires core;
-
-}

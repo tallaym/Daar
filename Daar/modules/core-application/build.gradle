@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation project(':core-domain')
+    implementation project(':core-port-in')
+    implementation project(':core-port-out')
+
+        implementation 'org.mindrot:jbcrypt:0.4'
+
+
+}
+java {
+    modularity.inferModulePath = true
+}

@@ -1,14 +1,26 @@
-rootProject.name = "Daar"
+rootProject.name = 'Daar'
+
+include 'core-domain'
+project (':core-domain').projectDir = file('modules/core-domain')
+
+include 'core-application'
+project (':core-application').projectDir = file('modules/core-application')
+
+include 'core-port-in'
+project (':core-port-in').projectDir = file('modules/core-port-in')
+
+include 'core-port-out'
+project (':core-port-out').projectDir = file('modules/core-port-out')
+
+include 'adapter-in'
+project (':adapter-in').projectDir = file('modules/adapter-in')
+
+include 'adapter-out'
+project (':adapter-out').projectDir = file('modules/adapter-out')
 
 
-//modules
-include 'core'
-    project (':core').projectDir = file('modules/core')
+include 'boot'
+project (':boot').projectDir = file('modules/boot')
 
-include 'application'
-    project (':application').projectDir = file('modules/application')
-
-include 'persistence'
-    project (':persistence').projectDir = file('modules/persistence')
 
 

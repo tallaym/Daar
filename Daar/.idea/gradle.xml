@@ -9,17 +9,13 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/modules/application" />
-            <option value="$PROJECT_DIR$/modules/core" />
-            <option value="$PROJECT_DIR$/modules/persistence" />
-          </set>
-        </option>
-      </GradleProjectSettings>
-      <GradleProjectSettings>
-        <option name="externalProjectPath" value="$PROJECT_DIR$/application" />
-        <option name="modules">
-          <set>
-            <option value="$PROJECT_DIR$/application" />
+            <option value="$PROJECT_DIR$/modules/adapter-in" />
+            <option value="$PROJECT_DIR$/modules/adapter-out" />
+            <option value="$PROJECT_DIR$/modules/boot" />
+            <option value="$PROJECT_DIR$/modules/core-application" />
+            <option value="$PROJECT_DIR$/modules/core-domain" />
+            <option value="$PROJECT_DIR$/modules/core-port-in" />
+            <option value="$PROJECT_DIR$/modules/core-port-out" />
           </set>
         </option>
       </GradleProjectSettings>

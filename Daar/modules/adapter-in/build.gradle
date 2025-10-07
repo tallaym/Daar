@@ -1,0 +1,14 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    implementation project(':core-domain')
+    implementation project(':core-port-in')
+
+
+}
+
+java {
+    modularity.inferModulePath = true
+}

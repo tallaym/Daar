@@ -1,40 +1,38 @@
 plugins {
-  id 'java'
-  id 'org.javamodularity.moduleplugin' version '1.8.12'
-  id 'org.openjfx.javafxplugin' version '0.0.13' apply false
+    id 'java'
+    id 'org.javamodularity.moduleplugin' version '1.8.12'
 }
 
 group = 'com.daar'
 version = '1.0-SNAPSHOT'
 
 repositories {
-  mavenCentral()
+    mavenCentral()
 }
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_17
-  targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 ext {
-  junitVersion = '5.10.0'
-  javafxVersion = '21'
+    junitVersion = '5.10.0'
 }
 
 subprojects {
-  apply plugin: 'java'
+    apply plugin: 'java'
 
-  repositories {
-    mavenCentral()
-  }
+    repositories {
+        mavenCentral()
+    }
 
 
-  java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
-  }
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 
-  test {
-    useJUnitPlatform()
-  }
+    test {
+        useJUnitPlatform()
+    }
 }

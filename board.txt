@@ -80,4 +80,18 @@ Focus sur les classes de base : user, mdp, document et permissions
 > Application à suivre
 
 
->>> Mardi 30/09/2025
+>>> Mardi 07/09/2025
+> architecture complète : 
+    DOMAIN      pour les classes 
+    PORT-IN     pour les usecases fréquents
+    PORT-OUT    pour les repositories
+    APPLICATION pour des services basés sur les ports
+    ADAPTER-OUT pour implémenter les repo avec un datasource defini aussi
+    ADAPTER-IN  pour permettre à l'appli de communiquer (entrées)
+    BOOT        pour lancer l'appli
+
+> DTO en cours
+
+> Service Login en cours
+
+>Date estimée de premier launch : 10/10/2025
