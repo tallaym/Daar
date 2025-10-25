@@ -1,7 +1,6 @@
 package com.daar.core.domain.model.auth;
 
 import com.daar.core.domain.model.auth.permission.UseRole;
-import com.daar.core.domain.model.auth.permission.UserPermission;
 import com.daar.core.domain.model.document.Document;
 
 import java.time.Instant;
@@ -32,7 +31,6 @@ public class User {
 
     private List<Credential> myCredentials;
     private List<UseRole> myRoles;
-    private List<UserPermission> myPermissions;
     private List<Document> myDocuments;
 
 
@@ -73,7 +71,6 @@ public class User {
         this.suspendedBy = suspendedBy;
         this.myCredentials = new ArrayList<>();
         this.myRoles = new ArrayList<>();
-        this.myPermissions = new ArrayList<>();
         this.myDocuments = new ArrayList<>();
 
     }
@@ -230,13 +227,6 @@ public class User {
         this.myRoles = myRoles;
     }
 
-    public List<UserPermission> getMyPermissions() {
-        return myPermissions;
-    }
-
-    public void setMyPermissions(List<UserPermission> myPermissions) {
-        this.myPermissions = myPermissions;
-    }
 
     public List<Document> getMyDocuments() {
         return myDocuments;

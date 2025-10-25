@@ -7,15 +7,14 @@ import com.daar.adapter.out.jdbc.auth.JdbcUser;
 import com.daar.adapter.out.jdbc.auth.permission.JdbcPermission;
 import com.daar.adapter.out.jdbc.auth.permission.JdbcRole;
 import com.daar.adapter.out.jdbc.auth.permission.JdbcUseRole;
-import com.daar.adapter.out.jdbc.auth.permission.JdbcUserPermission;
 import com.daar.adapter.out.jdbc.document.JdbcDocument;
 import com.daar.adapter.out.jdbc.document.JdbcType;
-import com.daar.core.application.auth.CredentialService;
-import com.daar.core.application.auth.UserService;
-import com.daar.core.application.auth.permission.PermissionService;
-import com.daar.core.application.auth.permission.RoleService;
-import com.daar.core.application.document.DocumentService;
-import com.daar.core.application.document.TypeService;
+import com.daar.core.application.service.auth.CredentialService;
+import com.daar.core.application.service.auth.UserService;
+import com.daar.core.application.service.auth.permission.PermissionService;
+import com.daar.core.application.service.auth.permission.RoleService;
+import com.daar.core.application.service.document.DocumentService;
+import com.daar.core.application.service.document.TypeService;
 
 import javax.sql.DataSource;
 
@@ -54,7 +53,7 @@ public class AppContext {
         // --- Initialisation des services ---
         userService = new UserService(userRepo);
         credentialService = new CredentialService(credentialRepo);
-        permissionService = new PermissionService(permissionRepo, userPermissionRepo);
+        permissionService = new PermissionService(permissionRepo);
         roleService = new RoleService(roleRepo, useRoleRepo);
         documentService = new DocumentService(documentRepo);
         typeService = new TypeService(typeRepo);

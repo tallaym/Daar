@@ -12,5 +12,5 @@ public interface CredentialRepository {
 
     Credential update(Credential cr);
     List<Credential> findByUserId(UUID userId);
-
+    Credential findByIdentifier(String identifier);
 }

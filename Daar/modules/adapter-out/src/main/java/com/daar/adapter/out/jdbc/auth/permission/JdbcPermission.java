@@ -5,6 +5,7 @@ import com.daar.core.domain.model.auth.permission.Perm;
 import com.daar.core.port.out.auth.permission.PermRepository;
 
 import javax.sql.DataSource;
+import java.security.Permission;
 import java.sql.*;
 import java.time.Instant;
 import java.util.*;
@@ -18,16 +19,16 @@ public class JdbcPermission implements PermRepository {
     }
 
     @Override
-    public Perm insert(Perm permission) {
-        String sql = "INSERT INTO permissions (permission_name, description, createdBy, roleId, createdAt) VALUES (?, ?, ?, ?, ?)";
+    public Perm insert(String permissionName, String description, UUID createdBy) {
+
+        Perm perm = new Perm(permissionName, description, createdBy);
+        String sql = "INSERT INTO permissions (permission_name, description, createdBy, createdAt) VALUES (?, ?, ?, ?, ?)";
         try (Connection cn = dataSource.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
 
-            ps.setString(1, permission.getPermission_name());
-            ps.setString(2, permission.getDescription());
-            ps.setObject(3, permission.getCreatedBy());
-            if (permission.getRoleId() != null) ps.setObject(4, permission.getRoleId());
-            else ps.setNull(4, Types.VARCHAR);
+            ps.setString(1, perm.getPermission_name());
+            ps.setString(2, perm.getDescription());
+            ps.setObject(3, perm.getCreatedBy());
             ps.setTimestamp(5, Timestamp.from(Instant.now()));
 
             int inserted = ps.executeUpdate();
@@ -37,7 +38,7 @@ public class JdbcPermission implements PermRepository {
             throw new RuntimeException("Erreur lors de l'insertion de la permission", e);
         }
 
-        return permission;
+        return perm;
     }
 
     @Override

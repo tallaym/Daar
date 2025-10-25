@@ -2,6 +2,7 @@ package com.daar.adapter.out.jdbc.auth;
 
 import com.daar.core.domain.model.auth.Credential;
 import com.daar.core.port.out.auth.CredentialRepository;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.sql.DataSource;
 import java.sql.*;
@@ -19,7 +20,7 @@ public class JdbcCredential implements CredentialRepository {
     @Override
     public Credential insert(UUID userId, Credential.CredentialType type, String identifier, String secret, Instant expiresAt){
 
-        Credential credential = new Credential(userId,type,identifier,secret,expiresAt);
+        Credential credential = new Credential(userId,type,identifier, BCrypt.hashpw(secret, BCrypt.gensalt()),expiresAt);
 
         String sql = """
             INSERT INTO credentials (id, user_id, type, identifier, secret, expires_at)
@@ -54,20 +55,21 @@ public class JdbcCredential implements CredentialRepository {
             throw new IllegalArgumentException("Cannot update credential without ID");
         }
 
+        cr.setSecret(BCrypt.hashpw(cr.getSecret(), BCrypt.gensalt()));
+
         String sql = """
             UPDATE credentials
-            SET identifier = ?, secret = ?, updated_at = ?, expires_at = ?
-            WHERE id = ?
+            SET secret = ?, updated_at = ?, expires_at = ?
+            WHERE identifier = ?
         """;
 
         try (Connection cn = dataSource.getConnection();
              PreparedStatement stmt = cn.prepareStatement(sql)) {
 
-            stmt.setString(1, cr.getIdentifier());
-            stmt.setString(2, cr.getSecret());
-            stmt.setTimestamp(3, Timestamp.from(Instant.now()));
-            stmt.setTimestamp(4, cr.getExpiresAt() != null ? Timestamp.from(cr.getExpiresAt()) : null);
-            stmt.setObject(5, cr.getId());
+            stmt.setString(1, cr.getSecret());
+            stmt.setTimestamp(2, Timestamp.from(Instant.now()));
+            stmt.setTimestamp(3, cr.getExpiresAt() != null ? Timestamp.from(cr.getExpiresAt()) : null);
+            stmt.setObject(4, cr.getIdentifier());
 
             int updatedRows = stmt.executeUpdate();
             if (updatedRows == 0){
@@ -100,6 +102,39 @@ public class JdbcCredential implements CredentialRepository {
 
         return credentials;
     }
+
+    @Override
+    public Credential findByIdentifier(String identifier) {
+        String sql = """
+        SELECT id, user_id, type, identifier, secret
+        FROM credentials
+        WHERE identifier = ?
+    """;
+
+        try (Connection cn = dataSource.getConnection();
+             PreparedStatement stmt = cn.prepareStatement(sql)) {
+
+            stmt.setString(1, identifier);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    Credential cr = new Credential();
+                    cr.setId(UUID.fromString(rs.getString("id")));
+                    cr.setUserId(UUID.fromString(rs.getString("user_id")));
+                    cr.setType(Credential.CredentialType.valueOf(rs.getString("type")));
+                    cr.setIdentifier(rs.getString("identifier"));
+                    cr.setSecret(rs.getString("secret"));
+                    return cr;
+                } else {
+                    throw new RuntimeException("Utilisateur inconnu");
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
     private Credential credentialTemplate(ResultSet rs) throws SQLException {
         Credential credential = new Credential();

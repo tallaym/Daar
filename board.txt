@@ -94,4 +94,15 @@ Focus sur les classes de base : user, mdp, document et permissions
 
 > Service Login en cours
 
->Date estimée de premier launch : 10/10/2025
+
+>>> Mercredi 25/10/2025 : Adapters-in
+> Revue complète des ports-in et services avec des DTO adaptés
+    tous les modules ont ete reformés pour respecter les nouveaux arguments
+
+> Service dedié à l'authentification avec Jwt stateless
+    incorporation de token access et refresh
+
+> STATE
+    l'objectif est désormais de permettre la connexion et la création de profils
+
+

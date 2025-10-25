@@ -12,6 +12,7 @@ public class UseRole {
     private UUID createdBy;
     private Instant createdAt;
     private Instant updatedAt;
+    private UUID updatedBy;
     private Instant expiresAt;
 
 
@@ -26,7 +27,7 @@ public class UseRole {
         this.expiresAt = expiresAt;
     }
 
-    public UseRole(UUID id, UUID userId, UUID roleId, UUID createdBy, Instant assignedAt, Instant updatedAt, Instant expiresAt) {
+    public UseRole(UUID id, UUID userId, UUID roleId, UUID createdBy, Instant assignedAt, UUID updatedBy, Instant updatedAt, Instant expiresAt) {
         this.id = id;
         this.userId = userId;
         this.roleId = roleId;
@@ -34,6 +35,7 @@ public class UseRole {
         this.createdAt = assignedAt;
         this.updatedAt = updatedAt;
         this.expiresAt = expiresAt;
+        this.updatedBy = updatedBy;
     }
 
     // Getters et Setters
@@ -49,8 +51,8 @@ public class UseRole {
     public UUID getCreatedBy() { return createdBy; }
     public void setCreatedBy(UUID createdBy) { this.createdBy = createdBy; }
 
-    public Instant getAssignedAt() { return assignedAt; }
-    public void setAssignedAt(Instant assignedAt) { this.assignedAt = assignedAt; }
+    public Instant getCreatedAt() { return createdAt; }
+    public void setCreatedAt(Instant assignedAt) { this.createdAt = assignedAt; }
 
     public Instant getUpdatedAt() { return updatedAt; }
     public void setUpdatedAt(Instant updatedAt) { this.updatedAt = updatedAt; }
@@ -58,5 +60,12 @@ public class UseRole {
     public Instant getExpiresAt() { return expiresAt; }
     public void setExpiresAt(Instant expiresAt) { this.expiresAt = expiresAt; }
 
+    public UUID getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(UUID updatedBy) {
+        this.updatedBy = updatedBy;
+    }
 }
 

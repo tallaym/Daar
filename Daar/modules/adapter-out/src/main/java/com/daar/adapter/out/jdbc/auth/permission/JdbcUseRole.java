@@ -1,7 +1,5 @@
 package com.daar.adapter.out.jdbc.auth.permission;
 
-import com.daar.core.domain.model.auth.User;
-import com.daar.core.domain.model.auth.permission.Role;
 import com.daar.core.domain.model.auth.permission.UseRole;
 import com.daar.core.port.out.auth.permission.UseRoleRepository;
 
@@ -22,13 +20,13 @@ public class JdbcUseRole implements UseRoleRepository {
     }
 
     @Override
-    public UseRole insert(User u, Role r, Instant end, User agent) {
+    public UseRole insert(UUID userId, UUID roleId, Instant end, UUID agentId) {
         String sql = """
             INSERT INTO UseRoles (id, userId, roleId, createdBy, expiresAt)
             VALUES (?, ?, ?, ?, ?)
         """;
 
-        UseRole ur = new UseRole(u.getId(), r.getId(), agent.getId(), end);
+        UseRole ur = new UseRole(userId, roleId, agentId, end);
 
         try (Connection cn = dataSource.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
@@ -124,6 +122,28 @@ public class JdbcUseRole implements UseRoleRepository {
     }
 
     @Override
+    public Optional<UseRole> findByUserId(UUID userId) {
+        String sql = "SELECT * FROM UseRoles WHERE userId = ?";
+
+        try (Connection cn = dataSource.getConnection();
+             PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setObject(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return Optional.of(useRoleTemplate(rs));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération du UseRole", e);
+        }
+
+        return Optional.empty();
+    }
+
+    @Override
     public List<UseRole> findRoleUsers(UUID roleId) {
         String sql = "SELECT * FROM UseRoles WHERE roleId = ?";
         List<UseRole> list = new ArrayList<>();
@@ -167,14 +187,13 @@ public class JdbcUseRole implements UseRoleRepository {
     }
 
     @Override
-    public Optional<UseRole> findUseRole(UUID userId, UUID roleId) {
-        String sql = "SELECT * FROM UseRoles WHERE userId = ? AND roleId = ?";
+    public Optional<UseRole> findUseRole(UUID urId) {
+        String sql = "SELECT * FROM UseRoles WHERE id = ?";
 
         try (Connection cn = dataSource.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {
 
-            ps.setObject(1, userId);
-            ps.setObject(2, roleId);
+            ps.setObject(1, urId);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -196,7 +215,7 @@ public class JdbcUseRole implements UseRoleRepository {
         ur.setRoleId((UUID) rs.getObject("roleId"));
 
         Timestamp createdTs = rs.getTimestamp("assignedAt");
-        if (createdTs != null) ur.setAssignedAt(createdTs.toInstant());
+        if (createdTs != null) ur.setCreatedAt(createdTs.toInstant());
 
         Timestamp updatedTs = rs.getTimestamp("updatedAt");
         if (updatedTs != null) ur.setUpdatedAt(updatedTs.toInstant());
