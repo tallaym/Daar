@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public interface UseRoleRepository {
 
-    UseRole insert(UUID userID, UUID roleId, Instant end, UUID agentId);
+    UseRole insert(UseRole job);
     UseRole update(UseRole ur);
     void delete(UUID userId, UUID roleId);
     List<UseRole> findUserRoles(UUID userId);

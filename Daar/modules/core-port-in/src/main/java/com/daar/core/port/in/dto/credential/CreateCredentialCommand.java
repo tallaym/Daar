@@ -5,21 +5,20 @@ import com.daar.core.domain.model.auth.Credential;
 import java.time.Instant;
 import java.util.UUID;
 
-public class UpdateCredentialDTO {
+public class CreateCredentialCommand {
+   UUID userId;
+   String identifier,secret;
+   Credential.CredentialType type;
+   Instant expiresAt;
 
-    UUID userId;
-    String identifier;
-    String secret;
-    Instant updatedAt, expiresAt;
-
-    public UpdateCredentialDTO() {
+    public CreateCredentialCommand() {
     }
 
-    public UpdateCredentialDTO(UUID userId, String identifier, String secret, Instant updatedAt, Instant expiresAt) {
+    public CreateCredentialCommand(UUID userId, Credential.CredentialType type, String identifier, String secret, Instant expiresAt) {
         this.userId = userId;
+        this.type = type;
         this.identifier = identifier;
         this.secret = secret;
-        this.updatedAt = updatedAt;
         this.expiresAt = expiresAt;
     }
 
@@ -31,12 +30,12 @@ public class UpdateCredentialDTO {
         this.userId = userId;
     }
 
-    public String getSecret() {
-        return secret;
+    public Credential.CredentialType getType() {
+        return type;
     }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
+    public void setType(Credential.CredentialType type) {
+        this.type = type;
     }
 
     public String getIdentifier() {
@@ -47,12 +46,12 @@ public class UpdateCredentialDTO {
         this.identifier = identifier;
     }
 
-    public Instant getUpdatedAt() {
-        return updatedAt;
+    public String getSecret() {
+        return secret;
     }
 
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     public Instant getExpiresAt() {

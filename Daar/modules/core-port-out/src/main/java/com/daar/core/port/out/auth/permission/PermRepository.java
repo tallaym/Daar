@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface PermRepository {
-    Perm insert(String roleName, String description, UUID createdBy);
+    Perm insert(Perm permission);
     Perm update(Perm permission);
     Optional<Perm> findById(UUID id);
     void delete(UUID id);

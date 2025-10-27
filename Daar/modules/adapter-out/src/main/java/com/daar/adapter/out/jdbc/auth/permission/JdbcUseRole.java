@@ -20,13 +20,12 @@ public class JdbcUseRole implements UseRoleRepository {
     }
 
     @Override
-    public UseRole insert(UUID userId, UUID roleId, Instant end, UUID agentId) {
+    public UseRole insert(UseRole ur) {
         String sql = """
             INSERT INTO UseRoles (id, userId, roleId, createdBy, expiresAt)
             VALUES (?, ?, ?, ?, ?)
         """;
 
-        UseRole ur = new UseRole(userId, roleId, agentId, end);
 
         try (Connection cn = dataSource.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {

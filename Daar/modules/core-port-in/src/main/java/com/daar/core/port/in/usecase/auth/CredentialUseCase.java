@@ -1,18 +1,18 @@
 package com.daar.core.port.in.usecase.auth;
 
 
-import com.daar.core.domain.model.auth.Credential;
-import com.daar.core.port.in.dto.credential.CreateCredentialDTO;
-import com.daar.core.port.in.dto.credential.UpdateCredentialDTO;
+import com.daar.core.port.in.dto.credential.CreateCredentialCommand;
+import com.daar.core.port.in.dto.credential.CredentialDTO;
+import com.daar.core.port.in.dto.credential.GetCredentialQuery;
+import com.daar.core.port.in.dto.credential.UpdateCredentialCommand;
 
 import java.util.List;
-import java.util.UUID;
 
 public interface CredentialUseCase {
 
-    UUID create(CreateCredentialDTO newCredential);
-    Credential modify(String identifier, UpdateCredentialDTO updatedCredential);
+    CredentialDTO create(CreateCredentialCommand newCredential);
+    CredentialDTO modify(String identifier, UpdateCredentialCommand updatedCredential);
 
-    List<Credential> userCredentials(UUID id);
+    List<CredentialDTO> userCredentials(GetCredentialQuery query);
 
 }

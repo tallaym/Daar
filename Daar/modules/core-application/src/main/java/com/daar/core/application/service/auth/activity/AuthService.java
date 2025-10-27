@@ -3,10 +3,9 @@ package com.daar.core.application.service.auth.activity;
 import com.daar.core.domain.model.auth.Credential;
 import com.daar.core.domain.model.auth.User;
 import com.daar.core.domain.model.auth.permission.UseRole;
-import com.daar.core.port.in.dto.credential.UpdateCredentialDTO;
+import com.daar.core.port.in.dto.credential.UpdateCredentialCommand;
 import com.daar.core.port.in.dto.login.LoginRequestDTO;
 import com.daar.core.port.in.dto.login.LoginResponseDTO;
-import com.daar.core.port.in.dto.login.LogoutRequestDTO;
 import com.daar.core.port.in.dto.login.RefreshTokenRequestDTO;
 import com.daar.core.port.in.usecase.auth.activity.AuthUseCase;
 import com.daar.core.port.out.auth.CredentialRepository;
@@ -63,7 +62,7 @@ throw new RuntimeException("job not found");
     }
 
     @Override
-    public void changePassword(String currentPassword, UpdateCredentialDTO request) {
+    public void changePassword(String currentPassword, UpdateCredentialCommand request) {
         Credential cr = credRepo.findByIdentifier(request.getIdentifier());
 
         if(!BCrypt.checkpw(currentPassword, cr.getSecret())){

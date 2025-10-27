@@ -2,12 +2,13 @@ package com.daar.core.application.service.auth;
 
 
 import com.daar.core.domain.model.auth.Credential;
-import com.daar.core.port.in.dto.credential.CreateCredentialDTO;
-import com.daar.core.port.in.dto.credential.UpdateCredentialDTO;
+import com.daar.core.port.in.dto.credential.CreateCredentialCommand;
+import com.daar.core.port.in.dto.credential.CredentialDTO;
+import com.daar.core.port.in.dto.credential.GetCredentialQuery;
+import com.daar.core.port.in.dto.credential.UpdateCredentialCommand;
 import com.daar.core.port.in.usecase.auth.CredentialUseCase;
 import com.daar.core.port.out.auth.CredentialRepository;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,24 +21,56 @@ public class CredentialService implements CredentialUseCase {
     }
 
     @Override
-    public UUID create(CreateCredentialDTO dto) {
-        return cr.insert(dto.getUserId(),dto.getType(), dto.getIdentifier(), dto.getSecret(),dto.getExpiresAt()).getId();
+    public CredentialDTO create(CreateCredentialCommand dto) {
+        // Création de l'entité sans ID (généré par le repository)
+        Credential cred = new Credential(
+                dto.getUserId(),
+                dto.getType(),
+                dto.getIdentifier(),
+                dto.getSecret(),
+                dto.getExpiresAt()
+        );
+
+        // Persistance
+        Credential saved = cr.insert(cred);
+
+        // Retour en DTO métier
+        return mapToDTO(saved);
     }
 
     @Override
-    public Credential modify(String identifier, UpdateCredentialDTO dto) {
+    public CredentialDTO modify(String identifier, UpdateCredentialCommand dto) {
         Credential cred = cr.findByIdentifier(identifier);
+        if (cred == null) {
+            throw new RuntimeException("Credential not found");
+        }
 
-        cred.setUpdatedAt(dto.getUpdatedAt());
-        cred.setExpiresAt(dto.getExpiresAt());
         cred.setSecret(dto.getSecret());
+        cred.setExpiresAt(dto.getExpiresAt());
+        cred.setUpdatedAt(dto.getUpdatedAt());
 
+        cr.update(cred);
 
-        return cr.update(cred);
+        return mapToDTO(cred);
     }
 
+
     @Override
-    public List<Credential> userCredentials(UUID id) {
-        return cr.findByUserId(id);
+    public List<CredentialDTO> userCredentials(GetCredentialQuery query) {
+        // Conversion des entités en DTO
+        return cr.findByUserId(query.getUserId())
+                .stream()
+                .map(this::mapToDTO)
+                .toList();
+    }
+    private CredentialDTO mapToDTO(Credential cred) {
+        return new CredentialDTO(
+                cred.getId(),
+                cred.getUserId(),
+                cred.getType(),
+                cred.getIdentifier(),
+                cred.getSecret(),
+                cred.getExpiresAt()
+        );
     }
 }

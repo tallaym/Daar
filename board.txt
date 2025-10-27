@@ -113,6 +113,7 @@ Focus sur les classes de base : user, mdp, document et permissions
 > le package rest est entamé avec CONFIG pour le routing
 
 > STATE
-    Congigurer les DTO rest puis les controllers
+    Configurer les DTO rest puis les controllers
+    Les DTO de ports in sont incomplets : role, permission et userole, login?
 
 

@@ -19,9 +19,8 @@ public class JdbcPermission implements PermRepository {
     }
 
     @Override
-    public Perm insert(String permissionName, String description, UUID createdBy) {
+    public Perm insert(Perm perm) {
 
-        Perm perm = new Perm(permissionName, description, createdBy);
         String sql = "INSERT INTO permissions (permission_name, description, createdBy, createdAt) VALUES (?, ?, ?, ?, ?)";
         try (Connection cn = dataSource.getConnection();
              PreparedStatement ps = cn.prepareStatement(sql)) {

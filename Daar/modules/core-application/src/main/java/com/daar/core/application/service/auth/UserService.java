@@ -2,8 +2,7 @@ package com.daar.core.application.service.auth;
 
 
 import com.daar.core.domain.model.auth.User;
-import com.daar.core.port.in.dto.user.CreateUserDTO;
-import com.daar.core.port.in.dto.user.UpdateUserDTO;
+import com.daar.core.port.in.dto.user.*;
 import com.daar.core.port.in.usecase.auth.UserUseCase;
 import com.daar.core.port.out.auth.UserRepository;
 
@@ -11,6 +10,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.toList;
 
 public class UserService implements UserUseCase {
 
@@ -21,11 +22,14 @@ public class UserService implements UserUseCase {
         this.ur = ur;
     }
 
-    public UUID create(CreateUserDTO dto) {
-        return ur.insert(dto.getFirstname(), dto.getLastname(), dto.getPhone(), dto.getCreatedBy()).getId();
+    public UserDTO create(CreateUserCommand command) {
+        User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getCreatedBy());
+        ur.insert(u);
+
+        return new UserDTO(u.getId(),u.getFirstname(), u.getLastname(), u.getPhone(),u.getCreatedBy());
     }
 
-    public User modify(UUID userId, UpdateUserDTO dto) {
+    public UserDTO modify(UUID userId, UpdateUserCommand dto) {
         User user = ur.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
 
         user.setFirstname(dto.getFirstname());
@@ -41,28 +45,91 @@ public class UserService implements UserUseCase {
         user.setSuspendedBy(dto.getSuspendedBy());
         user.setSuspendedUntil(dto.getSuspendedUntil());
 
-        return ur.update(user);
+        ur.update(user);
+
+        return new UserDTO(
+                user.getId(),
+                user.getFirstname(),
+                user.getLastname(),
+                user.getOrigin(),
+                user.getIdentityType(),
+                user.getIdentityNumber(),
+                user.getAddress(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getCreatedAt(),
+                user.getUpdatedAt(),
+                user.getSuspendedUntil(),
+                user.getCreatedBy(),
+                user.getUpdatedBy(),
+                user.getSuspendedBy());
     }
 
     @Override
-    public List<User> listUsers() {
-        return ur.findAll();
+    public List<UserDTO> listUsers() {
+        List<User> users = ur.findAll();
+        return users.stream()
+                .map(user -> new UserDTO(
+                        user.getId(),
+                        user.getFirstname(),
+                        user.getLastname(),
+                        user.getOrigin(),
+                        user.getIdentityType(),
+                        user.getIdentityNumber(),
+                        user.getAddress(),
+                        user.getEmail(),
+                        user.getPhone(),
+                        user.getCreatedAt(),
+                        user.getUpdatedAt(),
+                        user.getSuspendedUntil(),
+                        user.getCreatedBy(),
+                        user.getUpdatedBy(),
+                        user.getSuspendedBy())
+                )
+                .toList();
     }
 
-    public List<User> addedAfter(Date start) {
-        return ur.findAddedAfter(start);
+    public List<UserDTO> addedAfter(GetAfterDateQuery query) {
+        return ur.findAddedAfter(query.getDate())
+                .stream()
+                .map(user -> mapToDTO(user))
+                .toList();
     }
 
-
-    public List<User> addedBetween(Date start, Date end) {
-        return ur.findAddedBetween(start, end);
+    // Utilisateurs ajoutés entre deux dates
+    public List<UserDTO> addedBetween(GetBetweenDateQuery query) {
+        return ur.findAddedBetween(query.getStart(), query.getEnd())
+                .stream()
+                .map(user -> mapToDTO(user))
+                .toList();
     }
 
-    public Optional<User> getUserById(UUID id) {
-        return ur.findById(id);
+    // Recherche par ID
+    public Optional<UserDTO> getUserById(GetUserQuery query) {
+        return ur.findById(query.getId())
+                .map(user -> mapToDTO(user));
     }
 
+    private UserDTO mapToDTO(User user) {
+        return new UserDTO(
+                user.getId(),
+                user.getFirstname(),
+                user.getLastname(),
+                user.getOrigin(),
+                user.getIdentityType(),
+                user.getIdentityNumber(),
+                user.getAddress(),
+                user.getEmail(),
+                user.getPhone(),
+                user.getCreatedAt(),
+                user.getUpdatedAt(),
+                user.getSuspendedUntil(),
+                user.getCreatedBy(),
+                user.getUpdatedBy(),
+                user.getSuspendedBy());
 
+
+    }
 
 
 }

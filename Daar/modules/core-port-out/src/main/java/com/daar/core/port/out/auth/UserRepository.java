@@ -3,13 +3,14 @@ package com.daar.core.port.out.auth;
 
 import com.daar.core.domain.model.auth.User;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
-    User insert(String firstname, String lastname, String phone, UUID createdBy);
+    User insert(User user);
     User update(User user);
     Optional<User> findById(UUID id);
     List<User> findAll();

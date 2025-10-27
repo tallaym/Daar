@@ -18,8 +18,8 @@ public class JdbcUser implements UserRepository {
     }
 
     @Override
-    public User insert(String firstname, String lastname, String phone, UUID createdBy) {
-        User user = new User(firstname, lastname, phone, createdBy);
+    public User insert(User user) {
+
         boolean inserted = false;
         int attempts = 0;
         final int maxAttempts = 5;

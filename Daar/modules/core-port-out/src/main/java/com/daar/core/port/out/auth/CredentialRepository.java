@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CredentialRepository {
-    Credential insert(UUID userId, Credential.CredentialType type, String identifier, String secret, Instant expiresAt);
+    Credential insert(Credential cr);
 
     Credential update(Credential cr);
     List<Credential> findByUserId(UUID userId);

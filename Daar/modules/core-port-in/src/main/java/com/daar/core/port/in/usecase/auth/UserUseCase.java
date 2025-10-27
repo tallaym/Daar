@@ -2,8 +2,7 @@ package com.daar.core.port.in.usecase.auth;
 
 
 import com.daar.core.domain.model.auth.User;
-import com.daar.core.port.in.dto.user.CreateUserDTO;
-import com.daar.core.port.in.dto.user.UpdateUserDTO;
+import com.daar.core.port.in.dto.user.*;
 
 import java.util.Date;
 import java.util.List;
@@ -12,12 +11,12 @@ import java.util.UUID;
 
 public interface UserUseCase {
 
-    UUID create(CreateUserDTO newUser);
-    User modify(UUID userId, UpdateUserDTO userUpdated);
-    List<User> listUsers();
-    List<User> addedAfter(Date start);
-    List<User> addedBetween(Date start, Date end);
-    Optional<User> getUserById(UUID id);
+    UserDTO create(CreateUserCommand newUser);
+    UserDTO modify(UUID userId, UpdateUserCommand userUpdated);
+    List<UserDTO> listUsers();
+    List<UserDTO> addedAfter(GetAfterDateQuery query);
+    List<UserDTO> addedBetween(GetBetweenDateQuery query);
+    Optional<UserDTO> getUserById(GetUserQuery query);
 
 
 }

@@ -5,21 +5,30 @@ import com.daar.core.domain.model.auth.Credential;
 import java.time.Instant;
 import java.util.UUID;
 
-public class CreateCredentialDTO {
-   UUID userId;
-   String identifier,secret;
-   Credential.CredentialType type;
-   Instant expiresAt;
+public class CredentialDTO {
 
-    public CreateCredentialDTO() {
-    }
+    private UUID id;
+    private UUID userId;
+    private Credential.CredentialType type;
+    private String identifier;   // email, phone number, provider user id
+    private String secret;       // mot de passe hashé, clé OTP, etc.
+    private Instant expiresAt;
 
-    public CreateCredentialDTO(UUID userId, Credential.CredentialType type, String identifier, String secret, Instant expiresAt) {
+    public CredentialDTO(UUID id, UUID userId, Credential.CredentialType type, String identifier, String secret, Instant expiresAt) {
+        this.id = id;
         this.userId = userId;
         this.type = type;
         this.identifier = identifier;
         this.secret = secret;
         this.expiresAt = expiresAt;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public UUID getUserId() {

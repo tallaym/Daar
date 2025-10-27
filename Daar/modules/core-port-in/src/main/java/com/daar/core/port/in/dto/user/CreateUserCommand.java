@@ -2,15 +2,15 @@ package com.daar.core.port.in.dto.user;
 
 import java.util.UUID;
 
-public class CreateUserDTO {
+public class CreateUserCommand {
 
     String firstname, lastname, phone;
     UUID createdBy;
 
-    public CreateUserDTO() {
+    public CreateUserCommand() {
     }
 
-    public CreateUserDTO(String firstname, String lastname, String phone, UUID createdBy) {
+    public CreateUserCommand(String firstname, String lastname, String phone, UUID createdBy) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;

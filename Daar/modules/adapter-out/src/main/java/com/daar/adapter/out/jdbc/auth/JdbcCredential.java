@@ -18,9 +18,9 @@ public class JdbcCredential implements CredentialRepository {
     }
 
     @Override
-    public Credential insert(UUID userId, Credential.CredentialType type, String identifier, String secret, Instant expiresAt){
+    public Credential insert(Credential credential){
 
-        Credential credential = new Credential(userId,type,identifier, BCrypt.hashpw(secret, BCrypt.gensalt()),expiresAt);
+        credential.setSecret(BCrypt.hashpw(credential.getSecret(), BCrypt.gensalt()));
 
         String sql = """
             INSERT INTO credentials (id, user_id, type, identifier, secret, expires_at)

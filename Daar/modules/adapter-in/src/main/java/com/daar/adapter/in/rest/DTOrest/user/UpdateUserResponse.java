@@ -1,11 +1,9 @@
-package com.daar.core.port.in.dto.user;
-
-import com.daar.core.domain.model.auth.User;
+package com.daar.adapter.in.rest.DTOrest.user;
 
 import java.time.Instant;
 import java.util.UUID;
 
-public class UpdateUserDTO {
+public class UpdateUserResponse {
 
     private UUID id;
     private String firstname;
@@ -24,12 +22,7 @@ public class UpdateUserDTO {
     private UUID updatedBy;
     private UUID suspendedBy;
 
-
-    public UpdateUserDTO() {
-
-    }
-
-    public UpdateUserDTO(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+    public UpdateUserResponse(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -77,8 +70,8 @@ public class UpdateUserDTO {
         this.origin = origin;
     }
 
-    public User.IdentityType getIdentityType() {
-        return User.IdentityType.valueOf(identityType);
+    public String getIdentityType() {
+        return identityType;
     }
 
     public void setIdentityType(String identityType) {
@@ -117,7 +110,6 @@ public class UpdateUserDTO {
         this.phone = phone;
     }
 
-
     public Instant getUpdatedAt() {
         return updatedAt;
     }
@@ -133,7 +125,6 @@ public class UpdateUserDTO {
     public void setSuspendedUntil(Instant suspendedUntil) {
         this.suspendedUntil = suspendedUntil;
     }
-
 
     public UUID getUpdatedBy() {
         return updatedBy;
