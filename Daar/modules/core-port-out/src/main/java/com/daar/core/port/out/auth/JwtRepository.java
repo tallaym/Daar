@@ -1,6 +1,7 @@
 package com.daar.core.port.out.auth;
 
 import java.time.Instant;
+import java.util.Map;
 import java.util.UUID;
 
 public interface JwtRepository {
@@ -14,5 +15,7 @@ public interface JwtRepository {
     Instant extractExpiration(String token);
     boolean isTokenExpired(String token);
     boolean validateToken(String token);
+
+    Map<String, Object> extractAllClaims(String token);
 
 }

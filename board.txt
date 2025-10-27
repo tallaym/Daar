@@ -95,7 +95,7 @@ Focus sur les classes de base : user, mdp, document et permissions
 > Service Login en cours
 
 
->>> Mercredi 25/10/2025 : Adapters-in
+>>> Samedi 25/10/2025 : Adapters-in
 > Revue complète des ports-in et services avec des DTO adaptés
     tous les modules ont ete reformés pour respecter les nouveaux arguments
 
@@ -104,5 +104,15 @@ Focus sur les classes de base : user, mdp, document et permissions
 
 > STATE
     l'objectif est désormais de permettre la connexion et la création de profils
+
+
+
+>>> Lundi 27/10 : Adapters-in/DTO
+> Packages selon l'utilisation : event, batch et rest
+
+> le package rest est entamé avec CONFIG pour le routing
+
+> STATE
+    Congigurer les DTO rest puis les controllers
 
 

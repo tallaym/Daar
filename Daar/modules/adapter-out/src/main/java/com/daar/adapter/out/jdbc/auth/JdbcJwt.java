@@ -10,6 +10,7 @@ import io.jsonwebtoken.security.Keys;
 import java.security.Key;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 import java.util.function.Function;
 
@@ -102,6 +103,16 @@ public class JdbcJwt implements JwtRepository {
                 .getBody();
         return claimsResolver.apply(claims);
     }
+
+    public Map<String, Object> extractAllClaims(String token) {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(jwtSecret)
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
+        return claims;
+    }
+
 
 
 }
