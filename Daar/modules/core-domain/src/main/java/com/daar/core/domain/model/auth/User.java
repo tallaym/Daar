@@ -1,6 +1,5 @@
 package com.daar.core.domain.model.auth;
 
-import com.daar.core.domain.model.auth.permission.UseRole;
 import com.daar.core.domain.model.document.Document;
 
 import java.time.Instant;
@@ -11,9 +10,10 @@ import java.util.UUID;
 public class User {
 
     private UUID id;
+    private String KeycloakId;
     private String firstname;
     private String lastname;
-    private String origin = "Senegalese";
+    private String origin;
     private IdentityType identityType;
     private String identityNumber;
     private String address;
@@ -29,9 +29,6 @@ public class User {
     private UUID updatedBy;
     private UUID suspendedBy;
 
-    private List<Credential> myCredentials;
-    private List<UseRole> myRoles;
-    private List<Document> myDocuments;
 
 
     public enum IdentityType {
@@ -50,12 +47,15 @@ public class User {
         this.createdBy = createdBy;
     }
 
+
+
     //constructeur complet
 
 
-    public User(UUID id, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String adress, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
+    public User(UUID id, String KeyCloakId, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String adress, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
         this.firstname = firstname;
+        this.KeycloakId = KeyCloakId;
         this.lastname = lastname;
         this.origin = origin;
         this.identityType = identityType;
@@ -69,9 +69,6 @@ public class User {
         this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.suspendedBy = suspendedBy;
-        this.myCredentials = new ArrayList<>();
-        this.myRoles = new ArrayList<>();
-        this.myDocuments = new ArrayList<>();
 
     }
 
@@ -211,28 +208,11 @@ public class User {
             this.createdBy = createdBy;
         }
 
-    public List<Credential> getMyCredentials() {
-        return myCredentials;
+    public String getKeycloakId() {
+        return KeycloakId;
     }
 
-    public void setMyCredentials(List<Credential> myCredentials) {
-        this.myCredentials = myCredentials;
-    }
-
-    public List<UseRole> getMyRoles() {
-        return myRoles;
-    }
-
-    public void setMyRoles(List<UseRole> myRoles) {
-        this.myRoles = myRoles;
-    }
-
-
-    public List<Document> getMyDocuments() {
-        return myDocuments;
-    }
-
-    public void setMyDocuments(List<Document> myDocuments) {
-        this.myDocuments = myDocuments;
+    public void setKeycloakId(String keycloakId) {
+        KeycloakId = keycloakId;
     }
 }

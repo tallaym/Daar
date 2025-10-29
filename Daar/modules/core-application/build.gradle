@@ -7,14 +7,6 @@ dependencies {
     implementation project(':core-port-in')
     implementation project(':core-port-out')
 
-
-
-    implementation 'org.mindrot:jbcrypt:0.4'
-    implementation 'org.springframework.security:spring-security-crypto:6.3.3'
-
-
-
-
 }
 java {
     modularity.inferModulePath = true

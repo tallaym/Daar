@@ -4,6 +4,7 @@ package com.daar.core.application.service.auth;
 import com.daar.core.domain.model.auth.User;
 import com.daar.core.port.in.dto.user.*;
 import com.daar.core.port.in.usecase.auth.UserUseCase;
+import com.daar.core.port.out.auth.KeyCloakRepository;
 import com.daar.core.port.out.auth.UserRepository;
 
 import java.util.Date;
@@ -17,16 +18,22 @@ public class UserService implements UserUseCase {
 
 
     private final UserRepository ur;
+    private final KeyCloakRepository kr;
 
-    public UserService(UserRepository ur) {
+    public UserService(UserRepository ur, KeyCloakRepository kr) {
         this.ur = ur;
+        this.kr = kr;
     }
 
     public UserDTO create(CreateUserCommand command) {
-        User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getCreatedBy());
-        ur.insert(u);
 
-        return new UserDTO(u.getId(),u.getFirstname(), u.getLastname(), u.getPhone(),u.getCreatedBy());
+        String keyCloakId = kr.createUser(command.getFirstname(), command.getLastname(), command.getPhone());
+
+        User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getCreatedBy());
+            u.setKeycloakId(keyCloakId);
+            ur.insert(u);
+
+        return new UserDTO(u.getId(), u.getKeycloakId(), u.getFirstname(), u.getLastname(), u.getPhone(),u.getCreatedBy());
     }
 
     public UserDTO modify(UUID userId, UpdateUserCommand dto) {
@@ -45,54 +52,30 @@ public class UserService implements UserUseCase {
         user.setSuspendedBy(dto.getSuspendedBy());
         user.setSuspendedUntil(dto.getSuspendedUntil());
 
-        ur.update(user);
+        if(user.getKeycloakId() != null){
+            boolean success = kr.updateUser(user.getKeycloakId(), user.getFirstname(), user.getLastname(), user.getPhone());
+            if (success) {
+                ur.update(user);
+            } else {
+                throw new RuntimeException("Échec de la mise à jour Keycloak");
+            }
+        }
 
-        return new UserDTO(
-                user.getId(),
-                user.getFirstname(),
-                user.getLastname(),
-                user.getOrigin(),
-                user.getIdentityType(),
-                user.getIdentityNumber(),
-                user.getAddress(),
-                user.getEmail(),
-                user.getPhone(),
-                user.getCreatedAt(),
-                user.getUpdatedAt(),
-                user.getSuspendedUntil(),
-                user.getCreatedBy(),
-                user.getUpdatedBy(),
-                user.getSuspendedBy());
+        return mapToDTO(user);
     }
 
     @Override
     public List<UserDTO> listUsers() {
         List<User> users = ur.findAll();
         return users.stream()
-                .map(user -> new UserDTO(
-                        user.getId(),
-                        user.getFirstname(),
-                        user.getLastname(),
-                        user.getOrigin(),
-                        user.getIdentityType(),
-                        user.getIdentityNumber(),
-                        user.getAddress(),
-                        user.getEmail(),
-                        user.getPhone(),
-                        user.getCreatedAt(),
-                        user.getUpdatedAt(),
-                        user.getSuspendedUntil(),
-                        user.getCreatedBy(),
-                        user.getUpdatedBy(),
-                        user.getSuspendedBy())
-                )
+                .map(this::mapToDTO)
                 .toList();
     }
 
     public List<UserDTO> addedAfter(GetAfterDateQuery query) {
         return ur.findAddedAfter(query.getDate())
                 .stream()
-                .map(user -> mapToDTO(user))
+                .map(this::mapToDTO)
                 .toList();
     }
 
@@ -100,19 +83,20 @@ public class UserService implements UserUseCase {
     public List<UserDTO> addedBetween(GetBetweenDateQuery query) {
         return ur.findAddedBetween(query.getStart(), query.getEnd())
                 .stream()
-                .map(user -> mapToDTO(user))
+                .map(this::mapToDTO)
                 .toList();
     }
 
     // Recherche par ID
     public Optional<UserDTO> getUserById(GetUserQuery query) {
         return ur.findById(query.getId())
-                .map(user -> mapToDTO(user));
+                .map(this::mapToDTO);
     }
 
     private UserDTO mapToDTO(User user) {
         return new UserDTO(
                 user.getId(),
+                user.getKeycloakId(),
                 user.getFirstname(),
                 user.getLastname(),
                 user.getOrigin(),

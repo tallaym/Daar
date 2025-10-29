@@ -1,12 +1,12 @@
-package com.daar.core.port.in.dto.user;
+package com.daar.adapter.in.rest.request;
 
 import java.util.UUID;
 
-public class GetUserQuery {
+public class GetUserRequest {
 
     private UUID id;
 
-    public GetUserQuery(UUID id) {
+    public GetUserRequest(UUID id) {
         this.id = id;
     }
 
@@ -17,5 +17,4 @@ public class GetUserQuery {
     public void setId(UUID id) {
         this.id = id;
     }
-
 }

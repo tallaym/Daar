@@ -1,45 +1,29 @@
-package com.daar.core.port.in.dto.user;
-
-import com.daar.core.domain.model.auth.User;
+package com.daar.adapter.in.rest.response;
 
 import java.time.Instant;
 import java.util.UUID;
 
-public class UserDTO {
+public class UpdateUserResponse {
+
     private UUID id;
-    private String KeyCloakId;
     private String firstname;
     private String lastname;
     private String origin;
-    private User.IdentityType identityType;
+    private String identityType;
     private String identityNumber;
     private String address;
     private String email;
     private String phone;
 
 
-    private Instant createdAt;
     private Instant updatedAt;
     private Instant suspendedUntil;
 
-    private UUID createdBy;
     private UUID updatedBy;
     private UUID suspendedBy;
 
-
-
-    public UserDTO(UUID id, String keyCloakId, String firstname, String lastname, String phone, UUID createdBy) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
-        this.createdBy = createdBy;
-        this.KeyCloakId = keyCloakId;
+    public UpdateUserResponse(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
-    }
-
-    public UserDTO(UUID id, String keyCloakId, String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
-        this.id = id;
-        this.KeyCloakId = keyCloakId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.origin = origin;
@@ -48,20 +32,10 @@ public class UserDTO {
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.suspendedUntil = suspendedUntil;
-        this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.suspendedBy = suspendedBy;
-    }
-
-    public String getKeyCloakId() {
-        return KeyCloakId;
-    }
-
-    public void setKeyCloakId(String keyCloakId) {
-        KeyCloakId = keyCloakId;
     }
 
     public UUID getId() {
@@ -96,11 +70,11 @@ public class UserDTO {
         this.origin = origin;
     }
 
-    public User.IdentityType getIdentityType() {
+    public String getIdentityType() {
         return identityType;
     }
 
-    public void setIdentityType(User.IdentityType identityType) {
+    public void setIdentityType(String identityType) {
         this.identityType = identityType;
     }
 
@@ -136,14 +110,6 @@ public class UserDTO {
         this.phone = phone;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Instant getUpdatedAt() {
         return updatedAt;
     }
@@ -158,14 +124,6 @@ public class UserDTO {
 
     public void setSuspendedUntil(Instant suspendedUntil) {
         this.suspendedUntil = suspendedUntil;
-    }
-
-    public UUID getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(UUID createdBy) {
-        this.createdBy = createdBy;
     }
 
     public UUID getUpdatedBy() {

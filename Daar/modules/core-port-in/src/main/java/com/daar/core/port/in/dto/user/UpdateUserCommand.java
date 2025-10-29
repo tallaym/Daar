@@ -8,6 +8,7 @@ import java.util.UUID;
 public class UpdateUserCommand {
 
     private UUID id;
+    private String KeyCloakId;
     private String firstname;
     private String lastname;
     private String origin;
@@ -29,6 +30,23 @@ public class UpdateUserCommand {
 
     }
 
+    public UpdateUserCommand(UUID id, String keyCloakId, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+        this.id = id;
+        this.KeyCloakId = keyCloakId;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.origin = origin;
+        this.identityType = identityType;
+        this.identityNumber = identityNumber;
+        this.address = address;
+        this.email = email;
+        this.phone = phone;
+        this.updatedAt = updatedAt;
+        this.suspendedUntil = suspendedUntil;
+        this.updatedBy = updatedBy;
+        this.suspendedBy = suspendedBy;
+    }
+
     public UpdateUserCommand(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
         this.firstname = firstname;
@@ -43,6 +61,14 @@ public class UpdateUserCommand {
         this.suspendedUntil = suspendedUntil;
         this.updatedBy = updatedBy;
         this.suspendedBy = suspendedBy;
+    }
+
+    public String getKeyCloakId() {
+        return KeyCloakId;
+    }
+
+    public void setKeyCloakId(String keyCloakId) {
+        KeyCloakId = keyCloakId;
     }
 
     public UUID getId() {
