@@ -4,8 +4,10 @@ import com.daar.core.port.out.auth.KeyCloakRepository;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.UsersResource;
+import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 
+import java.util.List;
 
 
 public class JdbcKeyCloak implements KeyCloakRepository {
@@ -65,6 +67,46 @@ public class JdbcKeyCloak implements KeyCloakRepository {
             keycloak.realm(realm).users().get(keyCloakId).remove();
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean changePassword(String keyCloakId, String newPassword) {
+        try{
+            CredentialRepresentation cred = new CredentialRepresentation();
+            cred.setType(CredentialRepresentation.PASSWORD);
+            cred.setValue(newPassword);
+            cred.setTemporary(false);
+
+            keycloak.realm(realm)
+                    .users()
+                    .get(keyCloakId)
+                    .resetPassword(cred);
+            return true;
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean resetPassword(String contact) {
+        try{
+
+            var users = keycloak.realm(realm).users().search(contact);
+
+            if(users.isEmpty()) return false;
+
+            String keyCloakId = users.get(0).getId();
+            keycloak.realm(realm)
+                    .users()
+                    .get(keyCloakId)
+                    .executeActionsEmail(List.of("UPDATE_PASSWORD"));
+            return true;
+        }catch (Exception e){
             e.printStackTrace();
             return false;
         }

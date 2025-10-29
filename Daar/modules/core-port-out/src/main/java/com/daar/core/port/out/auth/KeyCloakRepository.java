@@ -8,4 +8,8 @@ public interface KeyCloakRepository {
     boolean updateUser(String keyCloakId, String firstname, String lastname, String phone);
     boolean deleteUser(String keyCloakId);
 
+    boolean changePassword(String keyCloakId, String newPassword);
+    boolean resetPassword(String contact);
+
+
 }
