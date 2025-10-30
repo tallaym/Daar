@@ -1,10 +1,10 @@
 package com.daar.core.port.in.dto.login;
 
-public class RefreshTokenRequestDTO {
+public class RefreshTokenQuery {
 
     private String refreshToken;
 
-    public RefreshTokenRequestDTO(String refreshToken) {
+    public RefreshTokenQuery(String refreshToken) {
         this.refreshToken = refreshToken;
     }
 

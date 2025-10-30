@@ -117,3 +117,10 @@ Focus sur les classes de base : user, mdp, document et permissions
     Les DTO de ports in sont incomplets : role, permission et userole, login?
 
 
+>>> Jeudi 30/10
+> Keycloak pour l'auth
+
+> STATE 
+    config AuthService, puis son adapter entrant
+
+

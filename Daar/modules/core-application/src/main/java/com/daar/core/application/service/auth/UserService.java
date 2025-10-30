@@ -18,16 +18,13 @@ public class UserService implements UserUseCase {
 
 
     private final UserRepository ur;
-    private final KeyCloakRepository kr;
 
-    public UserService(UserRepository ur, KeyCloakRepository kr) {
+    public UserService(UserRepository ur) {
         this.ur = ur;
-        this.kr = kr;
     }
 
-    public UserDTO create(CreateUserCommand command) {
+    public UserDTO create(CreateUserCommand command, String keyCloakId) {
 
-        String keyCloakId = kr.createUser(command.getFirstname(), command.getLastname(), command.getPhone());
 
         User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getCreatedBy());
             u.setKeycloakId(keyCloakId);
@@ -52,14 +49,9 @@ public class UserService implements UserUseCase {
         user.setSuspendedBy(dto.getSuspendedBy());
         user.setSuspendedUntil(dto.getSuspendedUntil());
 
-        if(user.getKeycloakId() != null){
-            boolean success = kr.updateUser(user.getKeycloakId(), user.getFirstname(), user.getLastname(), user.getPhone());
-            if (success) {
                 ur.update(user);
-            } else {
-                throw new RuntimeException("Échec de la mise à jour Keycloak");
-            }
-        }
+
+
 
         return mapToDTO(user);
     }

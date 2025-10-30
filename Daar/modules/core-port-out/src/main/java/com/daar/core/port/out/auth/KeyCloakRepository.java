@@ -11,5 +11,12 @@ public interface KeyCloakRepository {
     boolean changePassword(String keyCloakId, String newPassword);
     boolean resetPassword(String contact);
 
+    String login(String identifier, String secret);
+    boolean logout(String keyCloakId);
+    String refreshToken(String refreshToken);
+
+
+
+
 
 }

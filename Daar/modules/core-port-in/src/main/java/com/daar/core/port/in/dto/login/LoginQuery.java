@@ -1,10 +1,10 @@
 package com.daar.core.port.in.dto.login;
 
-public class LoginRequestDTO {
+public class LoginQuery {
 
     private String identifier, password;
 
-    public LoginRequestDTO(String identifier, String password) {
+    public LoginQuery(String identifier, String password) {
         this.identifier = identifier;
         this.password = password;
     }

@@ -6,6 +6,7 @@ module com.daar.adapter.out {
     requires keycloak.admin.client;
     requires org.postgresql.jdbc;
     requires keycloak.client.common.synced;
+    requires jakarta.ws.rs;
 
 
     exports com.daar.adapter.out.jdbc.document;

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 public interface UserUseCase {
 
-    UserDTO create(CreateUserCommand newUser);
+    UserDTO create(CreateUserCommand newUser, String keyCloakId);
     UserDTO modify(UUID userId, UpdateUserCommand userUpdated);
     List<UserDTO> listUsers();
     List<UserDTO> addedAfter(GetAfterDateQuery query);
