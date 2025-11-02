@@ -1,14 +1,13 @@
-package com.daar.core.port.in.dto.login;
+package com.daar.adapter.in.rest.response.auth;
 
-public class AuthDTO<T> {
+public class AuthResponse<T> {
+
     private boolean success;
     private String message;
 
-
-    public AuthDTO(boolean success, String message) {
+    public AuthResponse(boolean success, String message) {
         this.success = success;
         this.message = message;
-
     }
 
     public boolean isSuccess() {
@@ -26,6 +25,4 @@ public class AuthDTO<T> {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
 }

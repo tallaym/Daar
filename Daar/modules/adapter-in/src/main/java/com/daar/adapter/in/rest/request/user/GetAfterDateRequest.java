@@ -1,4 +1,4 @@
-package com.daar.adapter.in.rest.request;
+package com.daar.adapter.in.rest.request.user;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package com.daar.adapter.in.rest.response;
+package com.daar.adapter.in.rest.response.user;
 
 import java.util.List;
 

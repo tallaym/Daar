@@ -48,7 +48,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
         newUser.setUsername(phone);
         newUser.setFirstName(firstname);
         newUser.setLastName(lastname);
-        newUser.setEnabled(true);
+        newUser.setEnabled(false);
 
             keycloak.realm(realm).users().create(newUser);
 

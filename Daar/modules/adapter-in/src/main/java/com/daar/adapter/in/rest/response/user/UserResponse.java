@@ -1,9 +1,11 @@
-package com.daar.adapter.in.rest.request;
+package com.daar.adapter.in.rest.response.user;
+
+import com.daar.core.domain.model.auth.User;
 
 import java.time.Instant;
 import java.util.UUID;
 
-public class UpdateUserRequest {
+public class UserResponse {
 
     private UUID id;
     private String firstname;
@@ -15,14 +17,16 @@ public class UpdateUserRequest {
     private String email;
     private String phone;
 
+
+    private Instant createdAt;
     private Instant updatedAt;
     private Instant suspendedUntil;
 
+    private UUID createdBy;
     private UUID updatedBy;
     private UUID suspendedBy;
 
-
-    public UpdateUserRequest(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+    public UserResponse(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -32,8 +36,10 @@ public class UpdateUserRequest {
         this.address = address;
         this.email = email;
         this.phone = phone;
+        this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.suspendedUntil = suspendedUntil;
+        this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.suspendedBy = suspendedBy;
     }
@@ -110,6 +116,14 @@ public class UpdateUserRequest {
         this.phone = phone;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Instant getUpdatedAt() {
         return updatedAt;
     }
@@ -124,6 +138,14 @@ public class UpdateUserRequest {
 
     public void setSuspendedUntil(Instant suspendedUntil) {
         this.suspendedUntil = suspendedUntil;
+    }
+
+    public UUID getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(UUID createdBy) {
+        this.createdBy = createdBy;
     }
 
     public UUID getUpdatedBy() {

@@ -1,15 +1,13 @@
 package com.daar.adapter.in.rest.mapper;
 
-import com.daar.adapter.in.rest.request.*;
-import com.daar.adapter.in.rest.response.CreateUserResponse;
-import com.daar.adapter.in.rest.response.UpdateUserResponse;
-import com.daar.adapter.in.rest.response.UserResponse;
-import com.daar.adapter.in.rest.response.UsersListResponse;
+import com.daar.adapter.in.rest.request.user.*;
+import com.daar.adapter.in.rest.response.user.CreateUserResponse;
+import com.daar.adapter.in.rest.response.user.UpdateUserResponse;
+import com.daar.adapter.in.rest.response.user.UserResponse;
+import com.daar.adapter.in.rest.response.user.UsersListResponse;
 import com.daar.core.port.in.dto.user.*;
 
-import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class UserMapper {
@@ -59,7 +57,6 @@ public class UserMapper {
     public static CreateUserResponse toCreateResponse(UserDTO dto) {
         return new CreateUserResponse(
                 dto.getId(),
-                dto.getKeyCloakId(),
                 dto.getCreatedAt()
         );
     }
@@ -98,8 +95,8 @@ public class UserMapper {
                 dto.getSuspendedUntil(),
                 dto.getCreatedBy(),
                 dto.getUpdatedBy(),
-                dto.getSuspendedBy())
-                ;
+                dto.getSuspendedBy()
+
         );
     }
 

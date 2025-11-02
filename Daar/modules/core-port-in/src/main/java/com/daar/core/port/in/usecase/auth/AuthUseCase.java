@@ -5,13 +5,13 @@ import com.daar.core.port.in.dto.login.*;
 
 public interface AuthUseCase {
 
-    AuthDTO<KeyCloakDTO> register(RegisterUserCommand command);
+    AuthDTO<String> register(RegisterUserCommand command);
 
     // Modification des infos
     AuthDTO<Void> updateUser(UpdateUserCommand command);
 
     // Suppression
-    AuthDTO<Void> deleteUser(String keycloakId);
+    AuthDTO<Void> deleteUser(DeleteCommand command);
 
     // Login / tokens
     AuthDTO<String> login(LoginQuery query);  // retourne accessToken pour simplifier

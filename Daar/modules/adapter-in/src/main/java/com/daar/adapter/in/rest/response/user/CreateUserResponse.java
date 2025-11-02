@@ -1,4 +1,4 @@
-package com.daar.adapter.in.rest.response;
+package com.daar.adapter.in.rest.response.user;
 
 import com.daar.core.domain.model.auth.User;
 
@@ -8,12 +8,10 @@ import java.util.UUID;
 public class CreateUserResponse {
 
     private UUID id;
-    private String keyCloakId;
     private Instant createdAt;
 
-    public CreateUserResponse(UUID id, String keyCloakId, Instant createdAt) {
+    public CreateUserResponse(UUID id, Instant createdAt) {
         this.id = id;
-        this.keyCloakId = keyCloakId;
         this.createdAt = createdAt;
     }
 
@@ -25,13 +23,6 @@ public class CreateUserResponse {
         this.id = id;
     }
 
-    public String getKeyCloakId() {
-        return keyCloakId;
-    }
-
-    public void setKeyCloakId(String keyCloakId) {
-        this.keyCloakId = keyCloakId;
-    }
 
     public Instant getCreatedAt() {
         return createdAt;
