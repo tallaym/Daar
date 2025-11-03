@@ -8,13 +8,13 @@ public class AuthMapper {
 
     /// REST -> DTO
 
-    public RegisterUserCommand toCommand(RegisterRequest request) {
+    public static RegisterUserCommand toCommand(RegisterRequest request) {
         return new RegisterUserCommand(request.getFirstname(), request.getLastname(), request.getPhone());
     }
 
-    public UpdateUserCommand toCommand(UpdateRequest request) {
+    public static UpdateUserCommand toCommand(String id, UpdateRequest request) {
         return new UpdateUserCommand(
-                request.getKeyCloakId(),
+                id,
                 request.getFirstname(),
                 request.getLastname(),
                 request.getPhone(),
@@ -23,32 +23,32 @@ public class AuthMapper {
         );
     }
 
-    public DeleteCommand toCommand(DeleteRequest request) {
+    public static DeleteCommand toCommand(DeleteRequest request) {
         return new DeleteCommand(request.getKeyCloakId());
     }
 
 
-    public ChangePasswordCommand toCommand(ChangePasswordRequest req) {
+    public static ChangePasswordCommand toCommand(ChangePasswordRequest req) {
         return new ChangePasswordCommand(req.getKeycloakId(), req.getNewPassword());
     }
 
-    public ResetPasswordCommand toCommand(ResetPasswordRequest req) {
+    public static ResetPasswordCommand toCommand(ResetPasswordRequest req) {
         return new ResetPasswordCommand(req.getContact());
     }
 
-    public LoginQuery toQuery(LoginRequest req) {
+    public static LoginQuery toQuery(LoginRequest req) {
         return new LoginQuery(req.getIdentifier(), req.getPassword());
     }
 
-    public LogoutQuery toQuery(LogoutRequest req) {
+    public static LogoutQuery toQuery(LogoutRequest req) {
         return new LogoutQuery(req.getRefreshToken());
     }
 
-    public RefreshTokenQuery toQuery(RefreshTokenRequest req) {
+    public static RefreshTokenQuery toQuery(RefreshTokenRequest req) {
         return new RefreshTokenQuery(req.getRefreshToken());
     }
 
-    public <T> AuthResponse<T> toResponse(AuthDTO<?> dto) {
+    public static <T> AuthResponse<T> toResponse(AuthDTO<?> dto) {
         return new AuthResponse<>(dto.isSuccess(), dto.getMessage());
     }
 

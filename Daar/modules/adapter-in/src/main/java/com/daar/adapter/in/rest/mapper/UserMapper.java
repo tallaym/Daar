@@ -8,6 +8,7 @@ import com.daar.adapter.in.rest.response.user.UsersListResponse;
 import com.daar.core.port.in.dto.user.*;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class UserMapper {
@@ -18,9 +19,9 @@ public class UserMapper {
         return new CreateUserCommand(req.getFirstname(), req.getLastname(), req.getPhone(), req.getCreatedBy());
     }
 
-    public static UpdateUserCommand toCommand(UpdateUserRequest req) {
+    public static UpdateUserCommand toCommand(UUID userId, UpdateUserRequest req) {
         return new UpdateUserCommand(
-                req.getId(),
+                userId,
                 req.getFirstname(),
                 req.getLastname(),
                 req.getOrigin(),

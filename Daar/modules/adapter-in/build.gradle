@@ -2,9 +2,15 @@ plugins {
     id 'java-library'
 }
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     implementation project(':core-domain')
     implementation project(':core-port-in')
+
+    implementation 'io.javalin:javalin:6.7.0'
 
 
 }

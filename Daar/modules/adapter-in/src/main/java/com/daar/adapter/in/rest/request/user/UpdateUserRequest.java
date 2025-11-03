@@ -5,7 +5,6 @@ import java.util.UUID;
 
 public class UpdateUserRequest {
 
-    private UUID id;
     private String firstname;
     private String lastname;
     private String origin;
@@ -22,8 +21,8 @@ public class UpdateUserRequest {
     private UUID suspendedBy;
 
 
-    public UpdateUserRequest(UUID id, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
-        this.id = id;
+    public UpdateUserRequest(String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+
         this.firstname = firstname;
         this.lastname = lastname;
         this.origin = origin;
@@ -38,13 +37,6 @@ public class UpdateUserRequest {
         this.suspendedBy = suspendedBy;
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;

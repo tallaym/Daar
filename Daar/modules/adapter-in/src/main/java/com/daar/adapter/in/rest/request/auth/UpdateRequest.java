@@ -2,29 +2,21 @@ package com.daar.adapter.in.rest.request.auth;
 
 public class UpdateRequest {
 
-    private String keyCloakId;
     private String firstname;
     private String lastname;
     private String phone;
     private String email;
     private String password;
 
-    public UpdateRequest(String keyCloakId, String firstname, String lastname, String phone, String email, String password) {
-        this.keyCloakId = keyCloakId;
+    public UpdateRequest(String firstname, String lastname, String phone) {
+
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
-        this.email = email;
-        this.password = password;
     }
 
-    public String getKeyCloakId() {
-        return keyCloakId;
-    }
 
-    public void setKeyCloakId(String keyCloakId) {
-        this.keyCloakId = keyCloakId;
-    }
+
 
     public String getFirstname() {
         return firstname;

@@ -1,6 +1,9 @@
 package com.daar.core.port.in.dto.login;
 
+import java.util.UUID;
+
 public class UpdateUserCommand {
+
 
     private String keyCloakId;
     private String firstname;

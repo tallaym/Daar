@@ -123,4 +123,25 @@ Focus sur les classes de base : user, mdp, document et permissions
 > STATE 
     config AuthService, puis son adapter entrant
 
+>>> Samedi 01/11
+> les services et usecase ont leurs dto; les requests et responses suivent
+
+> STATE
+    config les controllers puis leur routes
+
+
+>>> Dimanche 02/11
+> méthodes des controllers definies avec les usecases pertinents
+
+> Choix de Javalin pour le networking
+
+> Controllers centralisé dans une classe dédiée
+
+> Les routes seront definies dans les controllers 
+
+
+> STATE
+    ajouter les routes aux controllers
+    modifier l'appContext puis lancer
+
 
