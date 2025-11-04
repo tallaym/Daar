@@ -11,6 +11,8 @@ import com.daar.adapter.in.rest.response.user.UpdateUserResponse;
 import com.daar.adapter.in.rest.response.user.UserResponse;
 import com.daar.adapter.in.rest.response.user.UsersListResponse;
 import com.daar.core.domain.model.auth.User;
+import com.daar.core.domain.validator.DateValidators;
+import com.daar.core.domain.validator.UserValidators;
 import com.daar.core.port.in.dto.login.AuthDTO;
 import com.daar.core.port.in.dto.login.RegisterUserCommand;
 import com.daar.core.port.in.dto.login.UpdateKeyCloakUserCommand;
@@ -23,6 +25,7 @@ import org.eclipse.jetty.server.handler.ContextHandler;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -46,12 +49,18 @@ public class UserController {
 
     private void insertHandler(Context ctx){
         CreateUserRequest userRequest = ctx.bodyAsClass(CreateUserRequest.class);
+            UserValidators.newUserValidator(
+                    userRequest.getFirstname(),
+                    userRequest.getLastname(),
+                    userRequest.getPhone()
+            );
 
         RegisterRequest authRequest = new RegisterRequest(
                 userRequest.getFirstname(),
                 userRequest.getLastname(),
                 userRequest.getPhone()
         );
+
         RegisterUserCommand authCommand = AuthMapper.toCommand(authRequest);
         AuthDTO<String> keyCloakId = authUseCase.register(authCommand);
 
@@ -60,16 +69,29 @@ public class UserController {
         ctx.json(dto).status(201);
     }
 
-
-
-
     private void updateHandler(Context ctx){
+
+        UserValidators.validateUUID(ctx.pathParam("id"));
         UUID id = UUID.fromString(ctx.pathParam("id"));
 
         UserDTO existingUser = useCase.getUserById(new GetUserQuery(id)).orElseThrow(() -> new RuntimeException("User not found"));
         String keyCloakId = existingUser.getKeyCloakId();
-        UpdateUserRequest request = ctx.bodyAsClass(UpdateUserRequest.class);
 
+        UpdateUserRequest request = ctx.bodyAsClass(UpdateUserRequest.class);
+            UserValidators.updateUserValidator(
+                    request.getFirstname(),
+                    request.getLastname(),
+                    request.getOrigin(),
+                    request.getIdentityType(),
+                    request.getIdentityNumber(),
+                    request.getAddress(),
+                    request.getEmail(),
+                    request.getPhone(),
+                    request.getUpdatedAt(),
+                    request.getSuspendedUntil(),
+                    request.getUpdatedBy(),
+                    request.getSuspendedBy()
+            );
         UpdateRequest keyCloakRequest = new UpdateRequest(
 
                 request.getFirstname(),
@@ -88,11 +110,12 @@ public class UserController {
 
 
     private void userByIdHandler(Context ctx){
-        UUID id = UUID.fromString(ctx.pathParam("id"));
-        GetUserRequest request = new GetUserRequest(id);
-        GetUserQuery query = UserMapper.toQuery(request);
-        UserDTO dto = useCase.getUserById(query).orElseThrow(() -> new RuntimeException("User not found"));
-        ctx.json(dto).status(200);
+        UserValidators.validateUUID(ctx.pathParam("id"));
+            UUID id = UUID.fromString(ctx.pathParam("id"));
+            GetUserRequest request = new GetUserRequest(id);
+            GetUserQuery query = UserMapper.toQuery(request);
+            UserDTO dto = useCase.getUserById(query).orElseThrow(() -> new RuntimeException("User not found"));
+            ctx.json(dto).status(200);
     }
 
 
@@ -104,6 +127,7 @@ public class UserController {
 
     public void getUsersAddedAfterHandler(Context ctx) throws ParseException {
         String dateStr = ctx.queryParam("date");
+        DateValidators.validateToInstant(dateStr);
             Date date = DATE_FORMAT.parse(dateStr);
         GetAfterDateRequest request = new GetAfterDateRequest(date);
         GetAfterDateQuery query = UserMapper.toQuery(request);
@@ -114,11 +138,15 @@ public class UserController {
 
 
     public void getUsersAddedBetweenHandler(Context ctx) throws ParseException {
-        String startStr = ctx.queryParam("start");
-            Date start = DATE_FORMAT.parse(startStr);
-        String endStr = ctx.queryParam("end");
-            Date end = DATE_FORMAT.parse(endStr);
 
+        String startStr = ctx.queryParam("start");
+        String endStr = ctx.queryParam("end");
+
+        assert startStr != null;
+        assert endStr != null;
+        DateValidators.validatePeriod(Instant.parse(startStr), Instant.parse(endStr));
+        Date start = DATE_FORMAT.parse(startStr);
+        Date end = DATE_FORMAT.parse(endStr);
         GetBetweenDateRequest request = new GetBetweenDateRequest(start, end);
         GetBetweenDateQuery query = UserMapper.toQuery(request);
         List<UserDTO> dtoList = useCase.addedBetween(query);

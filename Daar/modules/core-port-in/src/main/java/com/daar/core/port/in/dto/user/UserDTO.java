@@ -27,6 +27,8 @@ public class UserDTO {
     private UUID suspendedBy;
 
 
+    public UserDTO() {
+    }
 
     public UserDTO(UUID id, String keyCloakId, String firstname, String lastname, String phone, UUID createdBy) {
         this.firstname = firstname;

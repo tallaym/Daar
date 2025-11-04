@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2c40fd71-d93c-4c8f-b27b-f594457fe27b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jackson-annotations-2.17.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jackson-core-2.17.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jackson-datatype-jdk8-2.17.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jackson-datatype-jsr310-2.17.2.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jakarta.ws.rs-api-3.1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/keycloak-admin-client-26.0.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/keycloak-client-common-synced-26.0.7.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/microprofile-openapi-api-3.1.1.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/resteasy-client-6.2.9.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/resteasy-core-6.2.9.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/resteasy-core-spi-6.2.9.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/resteasy-jackson2-provider-6.2.9.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/resteasy-jaxb-provider-6.2.9.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/resteasy-multipart-provider-6.2.9.Final.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/UserDTO.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="3513QwOPJyMpD0TrQe3Y0aFhByl" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Daar.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-11.0.22-corretto-11.0.22-4caba194b151-868cef46" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2c40fd71-d93c-4c8f-b27b-f594457fe27b" name="Changes" comment="" />
+      <created>1762263741590</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1762263741590</updated>
+    </task>
+    <servers />
+  </component>
+</project>

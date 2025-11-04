@@ -148,5 +148,9 @@ Focus sur les classes de base : user, mdp, document et permissions
 >> Mardi 04/11
 > Suppression des module-info : compliation defaillante avec keycloak
 
+> Ajout de validators dans le domain
+
 > STATE
     PREMIERE VERSION FONCTIONNELLE ! - meme si ce n'est que pour les users -
+    tester les controllers
+    choix de la tech frontend

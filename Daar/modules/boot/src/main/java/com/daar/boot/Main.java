@@ -24,6 +24,7 @@ public class Main {
         AppContext appContext = new AppContext(ds);
 
         Javalin app = Javalin.create().start(7000);
+        app.get("/", ctx -> ctx.result("Marhaba fi Daar API"));
             new UserController(appContext.userService, appContext.authService).registerRoutes(app);
             new AuthController(appContext.authService).registerRoutes(app);
 
