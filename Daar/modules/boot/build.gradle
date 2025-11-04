@@ -11,11 +11,11 @@ dependencies {
     implementation project(':adapter-in')
     implementation project(':adapter-out')
 
-    implementation('io.javalin:javalin:6.7.0')
+    implementation 'io.javalin:javalin:6.7.0'
     implementation 'org.postgresql:postgresql:42.7.7'
     implementation 'com.zaxxer:HikariCP:5.0.1'
 
-    implementation files("$rootDir/libs/keycloak-admin-client-26.0.7.jar")
+    /*implementation files("$rootDir/libs/keycloak-admin-client-26.0.7.jar")
     implementation files("$rootDir/libs/keycloak-client-common-synced-26.0.7.jar")
     implementation files("$rootDir/libs/jackson-annotations-2.17.2.jar")
     implementation files("$rootDir/libs/jackson-core-2.17.2.jar")
@@ -27,8 +27,10 @@ dependencies {
     implementation files("$rootDir/libs/resteasy-jaxb-provider-6.2.9.Final.jar")
     implementation files("$rootDir/libs/resteasy-multipart-provider-6.2.9.Final.jar")
     implementation files("$rootDir/libs/jakarta.ws.rs-api-3.1.0.jar")
-
-
+    implementation files("$rootDir/libs/resteasy-core-spi-6.2.9.Final.jar")
+    implementation files("$rootDir/libs/resteasy-core-6.2.9.Final.jar")*/
+implementation("org.keycloak:keycloak-admin-client:26.0.7")
+    implementation("org.keycloak:keycloak-client-common-synced:26.0.7")
 
     compileOnly 'org.projectlombok:lombok:1.18.30'
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
@@ -36,9 +38,9 @@ dependencies {
 
 
 }
-def libsDir = file("$rootDir/libs")
+/*def libsDir = file("$rootDir/libs")
 
-tasks.withType(JavaCompile).configureEach {
+/*tasks.withType(JavaCompile).configureEach {
     options.compilerArgs += [
             '--module-path', "${libsDir.absolutePath};${classpath.asPath}",
     ]
@@ -49,20 +51,13 @@ tasks.register('runApp', JavaExec) {
     description = 'Run the boot module'
 
     mainClass.set('com.daar.boot.Main')
-    classpath = files() // vide pour forcer module-path
+    classpath = sourceSets.main.runtimeClasspath // pas de classpath classique
 
-    doFirst {
-    jvmArgs = [
-            '--module-path', "${rootDir}/libs;${buildDir}/libs",
-            '--module', 'com.daar.boot/com.daar.boot.Main'
-    ]}
+
 }
-
-
-
-
+*/
 java {
-    modularity.inferModulePath = true
+    modularity.inferModulePath = false
 }
 
 /*tasks.register('copyLibs', Copy) {

@@ -133,8 +133,8 @@ public class UserController {
     //////////////////////* ROUTES *///////////////////////
     public void registerRoutes(Javalin app) {
         app.post("/users", this::insertHandler);
-        app.put("/users/:id", this::updateHandler);
-        app.get("/users/:id", this::userByIdHandler);
+        app.put("/users/{id}", this::updateHandler);
+        app.get("/users/{id}", this::userByIdHandler);
         app.get("/users", this::allUsersHandler);
         app.get("/users/addedAfter", this::getUsersAddedAfterHandler);
         app.get("/users/addedBetween", this::getUsersAddedBetweenHandler);

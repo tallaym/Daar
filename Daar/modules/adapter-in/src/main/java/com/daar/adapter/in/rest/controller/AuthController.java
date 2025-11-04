@@ -71,7 +71,7 @@ public class AuthController {
 
     public void registerRoutes(Javalin app) {
         app.post("/auth/register", this::insertHandler);
-        app.put("/auth/update/:id", this::updateHandler);
+        app.put("/auth/update/{id}", this::updateHandler);
         app.post("/auth/login", this::loginHandler);
         app.post("/auth/refresh-token", this::refreshTokenHandler);
         app.post("/auth/logout", this::logoutHandler);

@@ -9,5 +9,5 @@ dependencies {
 
 }
 java {
-    modularity.inferModulePath = true
+    modularity.inferModulePath = false
 }

@@ -6,13 +6,13 @@ repositories {
     mavenCentral()
 }
 
-def libsDir = file("$rootDir/libs")
+/*def libsDir = file("$rootDir/libs")
 
 tasks.withType(JavaCompile).configureEach {
     options.compilerArgs += [
             '--module-path', "${libsDir.absolutePath};${classpath.asPath}"
     ]
-}
+}*/
 dependencies {
     implementation project(':core-domain')
     implementation project(':core-port-out')
@@ -20,6 +20,21 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.7.7'
     implementation 'com.zaxxer:HikariCP:5.0.1'
 
+   /* implementation files("$rootDir/libs/keycloak-admin-client-26.0.7.jar")
+    implementation files("$rootDir/libs/keycloak-client-common-synced-26.0.7.jar")
+    implementation files("$rootDir/libs/jackson-annotations-2.17.2.jar")
+    implementation files("$rootDir/libs/jackson-core-2.17.2.jar")
+    implementation files("$rootDir/libs/jackson-datatype-jdk8-2.17.2.jar")
+    implementation files("$rootDir/libs/jackson-datatype-jsr310-2.17.2.jar")
+    implementation files("$rootDir/libs/microprofile-openapi-api-3.1.1.jar")
+    implementation files("$rootDir/libs/resteasy-client-6.2.9.Final.jar")
+    implementation files("$rootDir/libs/resteasy-jackson2-provider-6.2.9.Final.jar")
+    implementation files("$rootDir/libs/resteasy-jaxb-provider-6.2.9.Final.jar")
+    implementation files("$rootDir/libs/resteasy-multipart-provider-6.2.9.Final.jar")
+    implementation files("$rootDir/libs/jakarta.ws.rs-api-3.1.0.jar")
+    implementation files("$rootDir/libs/resteasy-core-spi-6.2.9.Final.jar")*/
+    implementation("org.keycloak:keycloak-admin-client:26.0.7")
+    implementation("org.keycloak:keycloak-client-common-synced:26.0.7")
 
 
 
@@ -32,5 +47,6 @@ dependencies {
 }
 
 java {
-    modularity.inferModulePath = true
+    modularity.inferModulePath = false
+
 }
