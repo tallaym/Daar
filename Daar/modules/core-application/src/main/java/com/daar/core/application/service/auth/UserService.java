@@ -23,11 +23,11 @@ public class UserService implements UserUseCase {
         this.ur = ur;
     }
 
-    public UserDTO create(CreateUserCommand command, String keyCloakId) {
+    public UserDTO create(CreateUserCommand command) {
 
 
-        User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getCreatedBy());
-            u.setKeycloakId(keyCloakId);
+        User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getKeycloakId(), command.getCreatedBy());
+
             ur.insert(u);
 
         return new UserDTO(u.getId(), u.getKeycloakId(), u.getFirstname(), u.getLastname(), u.getPhone(),u.getCreatedBy());

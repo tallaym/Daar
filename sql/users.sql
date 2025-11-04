@@ -9,6 +9,7 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto";  -- Pour gen_random_uuid()
 CREATE TABLE IF NOT EXISTS users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
 
+    keycloakId      UUID UNIQUE NOT NULL,
     firstname        VARCHAR(50) NOT NULL,
     lastname         VARCHAR(50) NOT NULL,
     origin           VARCHAR(30) DEFAULT 'Senegalese',

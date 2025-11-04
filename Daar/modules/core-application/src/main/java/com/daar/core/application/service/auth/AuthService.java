@@ -3,7 +3,6 @@ package com.daar.core.application.service.auth;
 import com.daar.core.port.in.dto.login.*;
 import com.daar.core.port.in.usecase.auth.AuthUseCase;
 import com.daar.core.port.out.auth.KeyCloakRepository;
-import com.daar.core.port.out.auth.UserRepository;
 
 public class AuthService implements AuthUseCase {
 
@@ -28,7 +27,7 @@ public class AuthService implements AuthUseCase {
 
 
     @Override
-    public AuthDTO<Void> updateUser(UpdateUserCommand command) {
+    public AuthDTO<Void> updateUser(UpdateKeyCloakUserCommand command) {
         boolean updated = kr.updateUser(command.getKeyCloakId(), command.getFirstname(),
                 command.getLastname(), command.getPhone());
         return updated

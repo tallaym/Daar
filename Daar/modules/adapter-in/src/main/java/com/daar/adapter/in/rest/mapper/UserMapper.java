@@ -15,8 +15,8 @@ public class UserMapper {
 
     // REST -> SERVICES
 
-    public static CreateUserCommand toCommand(CreateUserRequest req) {
-        return new CreateUserCommand(req.getFirstname(), req.getLastname(), req.getPhone(), req.getCreatedBy());
+    public static CreateUserCommand toCommand(CreateUserRequest req, String keycloakId) {
+        return new CreateUserCommand(req.getFirstname(), req.getLastname(), req.getPhone(), keycloakId,req.getCreatedBy());
     }
 
     public static UpdateUserCommand toCommand(UUID userId, UpdateUserRequest req) {

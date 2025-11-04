@@ -8,7 +8,7 @@ public interface AuthUseCase {
     AuthDTO<String> register(RegisterUserCommand command);
 
     // Modification des infos
-    AuthDTO<Void> updateUser(UpdateUserCommand command);
+    AuthDTO<Void> updateUser(UpdateKeyCloakUserCommand command);
 
     // Suppression
     AuthDTO<Void> deleteUser(DeleteCommand command);

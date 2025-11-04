@@ -12,8 +12,8 @@ public class AuthMapper {
         return new RegisterUserCommand(request.getFirstname(), request.getLastname(), request.getPhone());
     }
 
-    public static UpdateUserCommand toCommand(String id, UpdateRequest request) {
-        return new UpdateUserCommand(
+    public static UpdateKeyCloakUserCommand toCommand(String id, UpdateRequest request) {
+        return new UpdateKeyCloakUserCommand(
                 id,
                 request.getFirstname(),
                 request.getLastname(),

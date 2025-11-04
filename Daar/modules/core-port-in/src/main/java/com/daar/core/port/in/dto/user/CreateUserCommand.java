@@ -5,16 +5,26 @@ import java.util.UUID;
 public class CreateUserCommand {
 
     String firstname, lastname, phone;
+    String KeycloakId;
     UUID createdBy;
 
     public CreateUserCommand() {
     }
 
-    public CreateUserCommand(String firstname, String lastname, String phone, UUID createdBy) {
+    public CreateUserCommand(String firstname, String lastname, String phone, String keycloakId, UUID createdBy) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
+        KeycloakId = keycloakId;
         this.createdBy = createdBy;
+    }
+
+    public String getKeycloakId() {
+        return KeycloakId;
+    }
+
+    public void setKeycloakId(String keycloakId) {
+        KeycloakId = keycloakId;
     }
 
     public String getFirstname() {

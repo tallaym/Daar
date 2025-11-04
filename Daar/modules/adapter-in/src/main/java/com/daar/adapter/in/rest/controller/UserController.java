@@ -13,18 +13,28 @@ import com.daar.adapter.in.rest.response.user.UsersListResponse;
 import com.daar.core.domain.model.auth.User;
 import com.daar.core.port.in.dto.login.AuthDTO;
 import com.daar.core.port.in.dto.login.RegisterUserCommand;
+import com.daar.core.port.in.dto.login.UpdateKeyCloakUserCommand;
 import com.daar.core.port.in.dto.user.*;
 import com.daar.core.port.in.usecase.auth.AuthUseCase;
 import com.daar.core.port.in.usecase.auth.UserUseCase;
 import io.javalin.Javalin;
+import io.javalin.http.Context;
+import org.eclipse.jetty.server.handler.ContextHandler;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class UserController {
 
     private final UserUseCase useCase;
     private final AuthUseCase authUseCase;
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
 
 
 
@@ -33,12 +43,10 @@ public class UserController {
         this.authUseCase = authUseCase;
     }
 
-    public void registerRoutes(Javalin app) {
-        // Define user-related routes here
-    }
 
+    private void insertHandler(Context ctx){
+        CreateUserRequest userRequest = ctx.bodyAsClass(CreateUserRequest.class);
 
-    public CreateUserResponse createUser(CreateUserRequest userRequest) {
         RegisterRequest authRequest = new RegisterRequest(
                 userRequest.getFirstname(),
                 userRequest.getLastname(),
@@ -47,45 +55,106 @@ public class UserController {
         RegisterUserCommand authCommand = AuthMapper.toCommand(authRequest);
         AuthDTO<String> keyCloakId = authUseCase.register(authCommand);
 
-
-        CreateUserCommand userCommand = UserMapper.toCommand(userRequest);
-        UserDTO dto = useCase.create(userCommand, String.valueOf(keyCloakId));
-        return UserMapper.toCreateResponse(dto);
+        CreateUserCommand command = UserMapper.toCommand(userRequest, keyCloakId.getMessage());
+        UserDTO dto = useCase.create(command);
+        ctx.json(dto).status(201);
     }
 
-    public UpdateUserResponse updateUser(UUID id, String keyCloakId, UpdateUserRequest request) {
+
+
+
+    private void updateHandler(Context ctx){
+        UUID id = UUID.fromString(ctx.pathParam("id"));
+
+        UserDTO existingUser = useCase.getUserById(new GetUserQuery(id)).orElseThrow(() -> new RuntimeException("User not found"));
+        String keyCloakId = existingUser.getKeyCloakId();
+        UpdateUserRequest request = ctx.bodyAsClass(UpdateUserRequest.class);
+
         UpdateRequest keyCloakRequest = new UpdateRequest(
+
                 request.getFirstname(),
                 request.getLastname(),
                 request.getPhone()
         );
-        com.daar.core.port.in.dto.login.UpdateUserCommand keyCloakCommand = AuthMapper.toCommand(keyCloakId, keyCloakRequest);
+
+        UpdateKeyCloakUserCommand keyCloakCommand = AuthMapper.toCommand(keyCloakId, keyCloakRequest);
         AuthDTO<Void> authResponse = authUseCase.updateUser(keyCloakCommand);
 
         UpdateUserCommand command = UserMapper.toCommand(id, request);
         UserDTO dto = useCase.modify(id, command);
-        return UserMapper.toUpdateResponse(dto);
+
+        ctx.json(dto).status(200);
     }
 
-    public UserResponse getUserById(GetUserRequest request) {
+
+    private void userByIdHandler(Context ctx){
+        UUID id = UUID.fromString(ctx.pathParam("id"));
+        GetUserRequest request = new GetUserRequest(id);
         GetUserQuery query = UserMapper.toQuery(request);
         UserDTO dto = useCase.getUserById(query).orElseThrow(() -> new RuntimeException("User not found"));
-        return UserMapper.toUserResponse(dto);
+        ctx.json(dto).status(200);
     }
 
-    public UsersListResponse getAllUsers() {
-        return UserMapper.toUsersListResponse(useCase.listUsers());
+
+    public void allUsersHandler(Context ctx){
+        List<UserDTO> dtoList = useCase.listUsers();
+        ctx.json(dtoList).status(200);
     }
 
-    public UsersListResponse getUsersAddedAfter(GetAfterDateRequest request) {
+
+    public void getUsersAddedAfterHandler(Context ctx) throws ParseException {
+        String dateStr = ctx.queryParam("date");
+            Date date = DATE_FORMAT.parse(dateStr);
+        GetAfterDateRequest request = new GetAfterDateRequest(date);
         GetAfterDateQuery query = UserMapper.toQuery(request);
         List<UserDTO> dtoList = useCase.addedAfter(query);
-        return UserMapper.toUsersListResponse(dtoList);
+        ctx.json(dtoList).status(200);
     }
 
-    public UsersListResponse getUsersAddedBetween(GetBetweenDateRequest request) {
+
+
+    public void getUsersAddedBetweenHandler(Context ctx) throws ParseException {
+        String startStr = ctx.queryParam("start");
+            Date start = DATE_FORMAT.parse(startStr);
+        String endStr = ctx.queryParam("end");
+            Date end = DATE_FORMAT.parse(endStr);
+
+        GetBetweenDateRequest request = new GetBetweenDateRequest(start, end);
         GetBetweenDateQuery query = UserMapper.toQuery(request);
         List<UserDTO> dtoList = useCase.addedBetween(query);
-        return UserMapper.toUsersListResponse(dtoList); // Placeholder
+        ctx.json(dtoList).status(200);
     }
+
+
+
+
+
+
+    //////////////////////* ROUTES *///////////////////////
+    public void registerRoutes(Javalin app) {
+        app.post("/users", this::insertHandler);
+        app.put("/users/:id", this::updateHandler);
+        app.get("/users/:id", this::userByIdHandler);
+        app.get("/users", this::allUsersHandler);
+        app.get("/users/addedAfter", this::getUsersAddedAfterHandler);
+        app.get("/users/addedBetween", this::getUsersAddedBetweenHandler);
+
+////
+//        app.routes(() -> {
+//            path("users", () -> {
+//                app.post("", this::insertHandler);
+//                app.get("", this::completeReadHandler);
+//                app.get("added-after", this::getUsersAddedAfterHandler);
+//                app.get("added-between", this::getUsersAddedBetweenHandler);
+//                path(":id", () -> {
+//                    app.get("", this::readHandler);
+//                    app.put("", this::updateHandler);
+//                });
+//            });
+//        });
+    }
+
+
+
+
 }

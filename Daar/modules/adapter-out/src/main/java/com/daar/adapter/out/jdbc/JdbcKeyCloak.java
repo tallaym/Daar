@@ -19,26 +19,18 @@ import java.util.List;
 public class JdbcKeyCloak implements KeyCloakRepository {
 
     private final Keycloak keycloak;
-    private final String realm;
+    private final KeyCloakConfig config;
 
-    private final String clientId;
-    private final String clientSecret;
-    private final String serverUrl;
 
-    public JdbcKeyCloak(String serverUrl, String realm, String clientId,
-                        String clientSecret, String adminUsername, String adminPassword) {
-        this.serverUrl = serverUrl;
-        this.realm = realm;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-
+    public JdbcKeyCloak(KeyCloakConfig config) {
+        this.config = config;
         this.keycloak = KeycloakBuilder.builder()
-                .serverUrl(serverUrl)
+                .serverUrl(config.serverUrl())
                 .realm("master")
-                .clientId(clientId)
-                .clientSecret(clientSecret)
-                .username(adminUsername)
-                .password(adminPassword)
+                .clientId(config.clientId())
+                .clientSecret(config.clientSecret())
+                .username(config.adminUsername())
+                .password(config.adminPassword())
                 .build();
     }
 
@@ -50,9 +42,9 @@ public class JdbcKeyCloak implements KeyCloakRepository {
         newUser.setLastName(lastname);
         newUser.setEnabled(false);
 
-            keycloak.realm(realm).users().create(newUser);
+            keycloak.realm(config.realm()).users().create(newUser);
 
-        return  keycloak.realm(realm).users().search(phone).get(0).getId();
+        return  keycloak.realm(config.realm()).users().search(phone).get(0).getId();
 
 
 
@@ -66,7 +58,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
             userUpated.setFirstName(firstname);
             userUpated.setLastName(lastname);
 
-            UsersResource ur = keycloak.realm(realm).users();
+            UsersResource ur = keycloak.realm(config.realm()).users();
                 ur.get(keyCloakId).update(userUpated);
                 return true;
 
@@ -79,7 +71,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     @Override
     public boolean deleteUser(String keyCloakId) {
         try {
-            keycloak.realm(realm).users().get(keyCloakId).remove();
+            keycloak.realm(config.realm()).users().get(keyCloakId).remove();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,7 +87,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
             cred.setValue(newPassword);
             cred.setTemporary(false);
 
-            keycloak.realm(realm)
+            keycloak.realm(config.realm())
                     .users()
                     .get(keyCloakId)
                     .resetPassword(cred);
@@ -111,12 +103,12 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     public boolean resetPassword(String contact) {
         try{
 
-            var users = keycloak.realm(realm).users().search(contact);
+            var users = keycloak.realm(config.realm()).users().search(contact);
 
             if(users.isEmpty()) return false;
 
             String keyCloakId = users.get(0).getId();
-            keycloak.realm(realm)
+            keycloak.realm(config.realm())
                     .users()
                     .get(keyCloakId)
                     .executeActionsEmail(List.of("UPDATE_PASSWORD"));
@@ -130,10 +122,10 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     @Override
     public String login(String username, String password) {
         Keycloak kcUser = KeycloakBuilder.builder()
-                .serverUrl(this.serverUrl)
-                .realm(this.realm)           // ton realm normal
-                .clientId(this.clientId)
-                .clientSecret(this.clientSecret)
+                .serverUrl(config.serverUrl())
+                .realm(config.realm())           // ton realm normal
+                .clientId(config.clientId())
+                .clientSecret(config.clientSecret())
                 .username(username)
                 .password(password)
                 .grantType(OAuth2Constants.PASSWORD)
@@ -146,7 +138,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     @Override
     public boolean logout(String keycloakId) {
         try {
-            keycloak.realm(realm).users().get(keycloakId).logout();
+            keycloak.realm(config.realm()).users().get(keycloakId).logout();
             return true;
         } catch (Exception e) {
             return false;
@@ -155,13 +147,13 @@ public class JdbcKeyCloak implements KeyCloakRepository {
 
     @Override
     public String refreshToken(String refreshToken) {
-        String tokenUrl = serverUrl + "/realms/" + realm + "/protocol/openid-connect/token";
+        String tokenUrl = config.serverUrl() + "/realms/" + config.realm() + "/protocol/openid-connect/token";
 
         Client client = ClientBuilder.newClient();
         Form form = new Form();
         form.param("grant_type", "refresh_token");
-        form.param("client_id", clientId);
-        form.param("client_secret", clientSecret);
+        form.param("client_id", config.clientId());
+        form.param("client_secret", config.clientSecret());
         form.param("refresh_token", refreshToken);
 
         Response response = client.target(tokenUrl)

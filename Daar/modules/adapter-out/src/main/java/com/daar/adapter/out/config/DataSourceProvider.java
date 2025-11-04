@@ -1,6 +1,7 @@
 package com.daar.adapter.out.config;
 
-import org.postgresql.ds.PGSimpleDataSource;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
 
@@ -15,19 +16,17 @@ public class DataSourceProvider {
 
 
     public DataSource createDataSource() {
-        switch (config.getDriver()) {
+        HikariConfig hikariConfig = new HikariConfig();
+            hikariConfig.setJdbcUrl(config.getUrl());
+            hikariConfig.setUsername(config.getUser());
+            hikariConfig.setPassword(config.getPassword());
+            hikariConfig.setDriverClassName(config.getDriver());
+            hikariConfig.setMaximumPoolSize(10);
+            hikariConfig.setMinimumIdle(2);
+            hikariConfig.setIdleTimeout(30000);
+            hikariConfig.setConnectionTimeout(30000);
 
-
-            case "org.postgresql.Driver":
-                PGSimpleDataSource pg = new PGSimpleDataSource();
-                pg.setURL(config.getUrl());
-                pg.setUser(config.getUser());
-                pg.setPassword(config.getPassword());
-                return pg;
-
-            default:
-                throw new IllegalArgumentException("Driver non supporté : " + config.getDriver());
-        }
+            return new HikariDataSource(hikariConfig);
     }
 
 }

@@ -1,4 +1,5 @@
 module com.daar.adapter.in {
+    exports com.daar.adapter.in.rest.controller;
     requires java.sql;
     requires io.javalin;
 

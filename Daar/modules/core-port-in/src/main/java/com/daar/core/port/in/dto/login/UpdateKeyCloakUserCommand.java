@@ -1,8 +1,6 @@
 package com.daar.core.port.in.dto.login;
 
-import java.util.UUID;
-
-public class UpdateUserCommand {
+public class UpdateKeyCloakUserCommand {
 
 
     private String keyCloakId;
@@ -12,7 +10,7 @@ public class UpdateUserCommand {
     private String email;
     private String password;
 
-    public UpdateUserCommand(String keyCloakId, String firstname, String lastname, String phone, String email, String password) {
+    public UpdateKeyCloakUserCommand(String keyCloakId, String firstname, String lastname, String phone, String email, String password) {
         this.keyCloakId = keyCloakId;
         this.firstname = firstname;
         this.lastname = lastname;

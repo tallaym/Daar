@@ -39,11 +39,12 @@ public class User {
     public User(){}
 
     //constructeur basique
-    public User(String firstname, String lastname, String phone, UUID createdBy) {
+    public User(String firstname, String lastname, String phone, String keycloakId, UUID createdBy) {
         this.id = UUID.randomUUID();
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
+        this.KeycloakId = keycloakId;
         this.createdBy = createdBy;
     }
 
