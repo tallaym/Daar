@@ -154,3 +154,11 @@ Focus sur les classes de base : user, mdp, document et permissions
     PREMIERE VERSION FONCTIONNELLE ! - meme si ce n'est que pour les users -
     tester les controllers
     choix de la tech frontend
+
+
+>> Vendredi 15/11
+> Tests
+    ils ont révélé plusieurs failles dans l'architecture
+    + ajout de class (handler) pour simplifier les controllers et donc les tests
+    - reduction de certaines requests/query parasites
+ 

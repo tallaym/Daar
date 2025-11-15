@@ -4,15 +4,12 @@ package com.daar.core.application.service.auth;
 import com.daar.core.domain.model.auth.User;
 import com.daar.core.port.in.dto.user.*;
 import com.daar.core.port.in.usecase.auth.UserUseCase;
-import com.daar.core.port.out.auth.KeyCloakRepository;
 import com.daar.core.port.out.auth.UserRepository;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
-import static java.util.stream.Collectors.toList;
 
 public class UserService implements UserUseCase {
 
@@ -64,24 +61,24 @@ public class UserService implements UserUseCase {
                 .toList();
     }
 
-    public List<UserDTO> addedAfter(GetAfterDateQuery query) {
-        return ur.findAddedAfter(query.getDate())
+    public List<UserDTO> addedAfter(Date query) {
+        return ur.findAddedAfter(query)
                 .stream()
                 .map(this::mapToDTO)
                 .toList();
     }
 
     // Utilisateurs ajoutés entre deux dates
-    public List<UserDTO> addedBetween(GetBetweenDateQuery query) {
-        return ur.findAddedBetween(query.getStart(), query.getEnd())
+    public List<UserDTO> addedBetween(Date start, Date end) {
+        return ur.findAddedBetween(start, end)
                 .stream()
                 .map(this::mapToDTO)
                 .toList();
     }
 
     // Recherche par ID
-    public Optional<UserDTO> getUserById(GetUserQuery query) {
-        return ur.findById(query.getId())
+    public Optional<UserDTO> getUserById(UUID query) {
+        return ur.findById(query)
                 .map(this::mapToDTO);
     }
 

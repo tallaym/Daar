@@ -5,28 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c40fd71-d93c-4c8f-b27b-f594457fe27b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/jackson-annotations-2.17.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/jackson-core-2.17.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/jackson-datatype-jdk8-2.17.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/jackson-datatype-jsr310-2.17.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/jakarta.ws.rs-api-3.1.0.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/keycloak-admin-client-26.0.7.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/keycloak-client-common-synced-26.0.7.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/microprofile-openapi-api-3.1.1.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/resteasy-client-6.2.9.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/resteasy-core-6.2.9.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/resteasy-core-spi-6.2.9.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/resteasy-jackson2-provider-6.2.9.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/resteasy-jaxb-provider-6.2.9.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libs/resteasy-multipart-provider-6.2.9.Final.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/adapter-in/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/user/GetAfterDateRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/user/GetBetweenDateRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/user/GetUserRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/response/user/UsersListResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/auth/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/auth/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/GetAfterDateQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/GetBetweenDateQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/user/GetUserQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/usecase/auth/UserUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/usecase/auth/UserUseCase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,10 +1,7 @@
 package com.daar.adapter.in.rest.mapper;
 
 import com.daar.adapter.in.rest.request.user.*;
-import com.daar.adapter.in.rest.response.user.CreateUserResponse;
-import com.daar.adapter.in.rest.response.user.UpdateUserResponse;
-import com.daar.adapter.in.rest.response.user.UserResponse;
-import com.daar.adapter.in.rest.response.user.UsersListResponse;
+import com.daar.adapter.in.rest.response.user.*;
 import com.daar.core.port.in.dto.user.*;
 
 import java.util.List;
@@ -39,17 +36,7 @@ public class UserMapper {
         );
     }
 
-    public static GetUserQuery toQuery(GetUserRequest req) {
-        return new GetUserQuery(req.getId());
-    }
 
-    public static GetAfterDateQuery toQuery(GetAfterDateRequest req) {
-        return new GetAfterDateQuery(req.getDate());
-    }
-
-    public static GetBetweenDateQuery toQuery(GetBetweenDateRequest req) {
-        return new GetBetweenDateQuery(req.getStart(), req.getEnd());
-    }
 
     ////////////////////////////////////
 
@@ -80,7 +67,7 @@ public class UserMapper {
                 ;
     }
 
-    public static UserResponse toUserResponse(UserDTO dto) {
+    public static UserResponse toResponse(UserDTO dto) {
         return new UserResponse(
                 dto.getId(),
                 dto.getFirstname(),
@@ -101,11 +88,10 @@ public class UserMapper {
         );
     }
 
-    public static UsersListResponse toUsersListResponse(List<UserDTO> dtos) {
-        List<UserResponse> responses = dtos.stream()
-                .map(UserMapper::toUserResponse)
+    public static List<UserResponse> toResponseList(List<UserDTO> dtos) {
+        return dtos.stream()
+                .map(UserMapper::toResponse)
                 .collect(Collectors.toList());
-        return new UsersListResponse(responses);
     }
 
 
