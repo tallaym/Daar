@@ -1,14 +1,18 @@
 package com.daar.adapter.in.rest.request.user;
 
+import com.daar.core.domain.model.auth.User;
+
 import java.time.Instant;
 import java.util.UUID;
 
 public class UpdateUserRequest {
 
+    private UUID id;
+    private String KeyCloakId;
     private String firstname;
     private String lastname;
     private String origin;
-    private String identityType;
+    private User.IdentityType identityType;
     private String identityNumber;
     private String address;
     private String email;
@@ -21,8 +25,11 @@ public class UpdateUserRequest {
     private UUID suspendedBy;
 
 
-    public UpdateUserRequest(String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
 
+
+    public UpdateUserRequest(UUID id, String keyCloakId, String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+        this.id = id;
+        this.KeyCloakId = keyCloakId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.origin = origin;
@@ -37,6 +44,21 @@ public class UpdateUserRequest {
         this.suspendedBy = suspendedBy;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public String getKeyCloakId() {
+        return KeyCloakId;
+    }
+
+    public void setKeyCloakId(String keyCloakId) {
+        KeyCloakId = keyCloakId;
+    }
 
     public String getFirstname() {
         return firstname;
@@ -62,11 +84,11 @@ public class UpdateUserRequest {
         this.origin = origin;
     }
 
-    public String getIdentityType() {
+    public User.IdentityType getIdentityType() {
         return identityType;
     }
 
-    public void setIdentityType(String identityType) {
+    public void setIdentityType(User.IdentityType identityType) {
         this.identityType = identityType;
     }
 

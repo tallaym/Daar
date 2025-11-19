@@ -8,6 +8,7 @@ import java.util.UUID;
 public class CreateUserResponse {
 
     private UUID id;
+
     private Instant createdAt;
 
     public CreateUserResponse(UUID id, Instant createdAt) {

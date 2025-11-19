@@ -73,8 +73,9 @@ public class User {
 
     }
 
-    public User(UUID id, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+    public User(UUID id, String key, String firstname, String lastname, String origin, IdentityType identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
+        this.KeycloakId = key;
         this.firstname = firstname;
         this.lastname = lastname;
         this.origin = origin;

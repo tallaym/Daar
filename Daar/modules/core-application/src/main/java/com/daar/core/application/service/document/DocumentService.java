@@ -2,7 +2,7 @@ package com.daar.core.application.service.document;
 
 import com.daar.core.domain.model.document.Document;
 import com.daar.core.port.in.usecase.document.DocumentUseCase;
-import com.daar.core.port.out.document.DocumentRepository;
+import com.daar.core.domain.port_out.document.DocumentRepository;
 
 import java.util.Date;
 import java.util.List;

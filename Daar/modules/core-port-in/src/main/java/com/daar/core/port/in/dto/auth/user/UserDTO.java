@@ -1,19 +1,17 @@
-package com.daar.adapter.in.rest.response.user;
+package com.daar.core.port.in.dto.auth.user;
 
 import com.daar.core.domain.model.auth.User;
 
 import java.time.Instant;
 import java.util.UUID;
 
-public class UserResponse {
-
+public class UserDTO {
     private UUID id;
-
     private String KeyCloakId;
     private String firstname;
     private String lastname;
     private String origin;
-    private String identityType;
+    private User.IdentityType identityType;
     private String identityNumber;
     private String address;
     private String email;
@@ -28,7 +26,20 @@ public class UserResponse {
     private UUID updatedBy;
     private UUID suspendedBy;
 
-    public UserResponse(UUID id, String keyCloakId, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
+
+    public UserDTO() {
+    }
+
+    public UserDTO(UUID id, String keyCloakId, String firstname, String lastname, String phone, UUID createdBy) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.createdBy = createdBy;
+        this.KeyCloakId = keyCloakId;
+        this.id = id;
+    }
+
+    public UserDTO(UUID id, String keyCloakId, String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
         this.KeyCloakId = keyCloakId;
         this.firstname = firstname;
@@ -47,6 +58,13 @@ public class UserResponse {
         this.suspendedBy = suspendedBy;
     }
 
+    public String getKeyCloakId() {
+        return KeyCloakId;
+    }
+
+    public void setKeyCloakId(String keyCloakId) {
+        KeyCloakId = keyCloakId;
+    }
 
     public UUID getId() {
         return id;
@@ -54,14 +72,6 @@ public class UserResponse {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public String getKeyCloakId() {
-        return KeyCloakId;
-    }
-
-    public void setKeyCloakId(String keyCloakId) {
-        KeyCloakId = keyCloakId;
     }
 
     public String getFirstname() {
@@ -88,11 +98,11 @@ public class UserResponse {
         this.origin = origin;
     }
 
-    public String getIdentityType() {
+    public User.IdentityType getIdentityType() {
         return identityType;
     }
 
-    public void setIdentityType(String identityType) {
+    public void setIdentityType(User.IdentityType identityType) {
         this.identityType = identityType;
     }
 

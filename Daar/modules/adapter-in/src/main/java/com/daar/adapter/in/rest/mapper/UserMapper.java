@@ -2,7 +2,11 @@ package com.daar.adapter.in.rest.mapper;
 
 import com.daar.adapter.in.rest.request.user.*;
 import com.daar.adapter.in.rest.response.user.*;
-import com.daar.core.port.in.dto.user.*;
+import com.daar.core.domain.model.auth.User;
+import com.daar.core.port.in.dto.auth.CreateUserCommand;
+import com.daar.core.port.in.dto.auth.UpdateUserCommand;
+import com.daar.core.port.in.dto.auth.user.UserDTO;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -12,13 +16,19 @@ public class UserMapper {
 
     // REST -> SERVICES
 
-    public static CreateUserCommand toCommand(CreateUserRequest req, String keycloakId) {
-        return new CreateUserCommand(req.getFirstname(), req.getLastname(), req.getPhone(), keycloakId,req.getCreatedBy());
+    public static CreateUserCommand toCommand(CreateUserRequest req) {
+        return new CreateUserCommand(
+                req.getFirstname(),
+                req.getLastname(),
+                req.getPhone(),
+                req.getKeyCloakId(),
+                req.getCreatedBy()
+        );
     }
 
-    public static UpdateUserCommand toCommand(UUID userId, UpdateUserRequest req) {
+    public static UpdateUserCommand toCommand(UUID id, UpdateUserRequest req) {
         return new UpdateUserCommand(
-                userId,
+                id,
                 req.getFirstname(),
                 req.getLastname(),
                 req.getOrigin(),
@@ -27,9 +37,6 @@ public class UserMapper {
                 req.getAddress(),
                 req.getEmail(),
                 req.getPhone(),
-
-                req.getUpdatedAt(),
-
                 req.getSuspendedUntil(),
                 req.getUpdatedBy(),
                 req.getSuspendedBy()
@@ -42,34 +49,18 @@ public class UserMapper {
 
     // SERVICES -> REST
 
-    public static CreateUserResponse toCreateResponse(UserDTO dto) {
+    public static CreateUserResponse toSimpleResponse(UserDTO dto) {
         return new CreateUserResponse(
                 dto.getId(),
                 dto.getCreatedAt()
         );
     }
 
-    public static UpdateUserResponse toUpdateResponse(UserDTO dto) {
-        return new UpdateUserResponse(
-                dto.getId(),
-                dto.getFirstname(),
-                dto.getLastname(),
-                dto.getOrigin(),
-                String.valueOf(dto.getIdentityType()),
-                dto.getIdentityNumber(),
-                dto.getAddress(),
-                dto.getEmail(),
-                dto.getPhone(),
-                dto.getUpdatedAt(),
-                dto.getSuspendedUntil(),
-                dto.getUpdatedBy(),
-                dto.getSuspendedBy())
-                ;
-    }
 
     public static UserResponse toResponse(UserDTO dto) {
         return new UserResponse(
                 dto.getId(),
+                dto.getKeyCloakId(),
                 dto.getFirstname(),
                 dto.getLastname(),
                 dto.getOrigin(),
@@ -84,6 +75,7 @@ public class UserMapper {
                 dto.getCreatedBy(),
                 dto.getUpdatedBy(),
                 dto.getSuspendedBy()
+
 
         );
     }

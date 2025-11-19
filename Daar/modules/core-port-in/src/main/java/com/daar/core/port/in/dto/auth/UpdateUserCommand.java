@@ -1,36 +1,37 @@
-package com.daar.adapter.in.rest.response.user;
+package com.daar.core.port.in.dto.auth;
 
 import com.daar.core.domain.model.auth.User;
 
 import java.time.Instant;
 import java.util.UUID;
 
-public class UserResponse {
+public class UpdateUserCommand {
 
-    private UUID id;
-
-    private String KeyCloakId;
+private UUID id;
     private String firstname;
     private String lastname;
     private String origin;
-    private String identityType;
+    private User.IdentityType identityType;
     private String identityNumber;
     private String address;
     private String email;
     private String phone;
 
 
-    private Instant createdAt;
-    private Instant updatedAt;
     private Instant suspendedUntil;
 
-    private UUID createdBy;
     private UUID updatedBy;
     private UUID suspendedBy;
 
-    public UserResponse(UUID id, String keyCloakId, String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant createdAt, Instant updatedAt, Instant suspendedUntil, UUID createdBy, UUID updatedBy, UUID suspendedBy) {
+
+    public UpdateUserCommand() {
+
+    }
+
+
+
+    public UpdateUserCommand(UUID id, String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         this.id = id;
-        this.KeyCloakId = keyCloakId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.origin = origin;
@@ -39,14 +40,10 @@ public class UserResponse {
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
         this.suspendedUntil = suspendedUntil;
-        this.createdBy = createdBy;
         this.updatedBy = updatedBy;
         this.suspendedBy = suspendedBy;
     }
-
 
     public UUID getId() {
         return id;
@@ -56,13 +53,7 @@ public class UserResponse {
         this.id = id;
     }
 
-    public String getKeyCloakId() {
-        return KeyCloakId;
-    }
 
-    public void setKeyCloakId(String keyCloakId) {
-        KeyCloakId = keyCloakId;
-    }
 
     public String getFirstname() {
         return firstname;
@@ -88,11 +79,11 @@ public class UserResponse {
         this.origin = origin;
     }
 
-    public String getIdentityType() {
+    public User.IdentityType getIdentityType() {
         return identityType;
     }
 
-    public void setIdentityType(String identityType) {
+    public void setIdentityType(User.IdentityType identityType) {
         this.identityType = identityType;
     }
 
@@ -128,21 +119,7 @@ public class UserResponse {
         this.phone = phone;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
 
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public Instant getSuspendedUntil() {
         return suspendedUntil;
@@ -152,13 +129,6 @@ public class UserResponse {
         this.suspendedUntil = suspendedUntil;
     }
 
-    public UUID getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(UUID createdBy) {
-        this.createdBy = createdBy;
-    }
 
     public UUID getUpdatedBy() {
         return updatedBy;

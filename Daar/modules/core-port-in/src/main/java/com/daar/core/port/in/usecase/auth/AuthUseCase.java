@@ -1,21 +1,20 @@
 package com.daar.core.port.in.usecase.auth;
 
 
-import com.daar.core.port.in.dto.login.*;
+import com.daar.core.port.in.dto.auth.login.AuthDTO;
+import com.daar.core.port.in.dto.auth.login.cmd.*;
+
+import com.daar.core.port.in.dto.auth.login.query.KeycloakData;
+import com.daar.core.port.in.dto.auth.login.query.LoginQuery;
+import com.daar.core.port.in.dto.auth.login.query.LogoutQuery;
+import com.daar.core.port.in.dto.auth.login.query.RefreshTokenQuery;
 
 public interface AuthUseCase {
 
-    AuthDTO<String> register(RegisterUserCommand command);
-
-    // Modification des infos
-    AuthDTO<Void> updateUser(UpdateKeyCloakUserCommand command);
-
-    // Suppression
-    AuthDTO<Void> deleteUser(DeleteCommand command);
 
     // Login / tokens
-    AuthDTO<String> login(LoginQuery query);  // retourne accessToken pour simplifier
-    AuthDTO<String> refreshToken(RefreshTokenQuery query);
+    AuthDTO<KeycloakData> login(LoginQuery query);  // retourne accessToken pour simplifier
+    AuthDTO<KeycloakData> refreshToken(RefreshTokenQuery query);
     AuthDTO<Void> logout(LogoutQuery query);
 
     // Mots de passe

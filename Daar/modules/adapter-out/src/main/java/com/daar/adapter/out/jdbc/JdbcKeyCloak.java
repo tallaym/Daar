@@ -1,10 +1,14 @@
 package com.daar.adapter.out.jdbc;
 
-import com.daar.core.port.out.auth.KeyCloakRepository;
+import com.daar.core.domain.port_out.KeycloakTokenDTO;
+import com.daar.core.domain.port_out.auth.KeyCloakRepository;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.keycloak.OAuth2Constants;
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
 import org.keycloak.admin.client.resource.UsersResource;
+import org.keycloak.representations.AccessTokenResponse;
 import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import jakarta.ws.rs.client.Client;
@@ -35,11 +39,12 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     }
 
     @Override
-    public String createUser(String firstname, String lastname, String phone) {
+    public String createKeycloakUser(String firstname, String lastname, String phone) {
         UserRepresentation newUser = new UserRepresentation();
         newUser.setUsername(phone);
         newUser.setFirstName(firstname);
         newUser.setLastName(lastname);
+        newUser.setEmail(phone + "@example.com");
         newUser.setEnabled(false);
 
             keycloak.realm(config.realm()).users().create(newUser);
@@ -51,15 +56,16 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     }
 
     @Override
-    public boolean updateUser(String keyCloakId, String firstname, String lastname, String phone) {
+    public boolean updateKeycloakUser(String keyCloakId, String firstname, String lastname, String phone, String email) {
         try{
-            UserRepresentation userUpated = new UserRepresentation();
-            userUpated.setUsername(phone);
-            userUpated.setFirstName(firstname);
-            userUpated.setLastName(lastname);
+            UserRepresentation userUpdated = new UserRepresentation();
+            userUpdated.setUsername(phone);
+            userUpdated.setFirstName(firstname);
+            userUpdated.setLastName(lastname);
+            userUpdated.setEmail(email);
 
             UsersResource ur = keycloak.realm(config.realm()).users();
-                ur.get(keyCloakId).update(userUpated);
+                ur.get(keyCloakId).update(userUpdated);
                 return true;
 
         }catch (Exception e){
@@ -69,7 +75,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     }
 
     @Override
-    public boolean deleteUser(String keyCloakId) {
+    public boolean deleteKeycloakUser(String keyCloakId) {
         try {
             keycloak.realm(config.realm()).users().get(keyCloakId).remove();
             return true;
@@ -120,7 +126,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     }
 
     @Override
-    public String login(String username, String password) {
+    public KeycloakTokenDTO login(String username, String password) {
         Keycloak kcUser = KeycloakBuilder.builder()
                 .serverUrl(config.serverUrl())
                 .realm(config.realm())           // ton realm normal
@@ -131,7 +137,14 @@ public class JdbcKeyCloak implements KeyCloakRepository {
                 .grantType(OAuth2Constants.PASSWORD)
                 .build();
 
-        return kcUser.tokenManager().getAccessTokenString();
+        AccessTokenResponse token =  kcUser.tokenManager().getAccessToken();
+
+        return new KeycloakTokenDTO(
+                token.getToken(),
+                token.getRefreshToken(),
+                token.getExpiresIn(),
+                token.getRefreshExpiresIn()
+        );
     }
 
 
@@ -146,7 +159,7 @@ public class JdbcKeyCloak implements KeyCloakRepository {
     }
 
     @Override
-    public String refreshToken(String refreshToken) {
+    public KeycloakTokenDTO refreshToken(String refreshToken) {
         String tokenUrl = config.serverUrl() + "/realms/" + config.realm() + "/protocol/openid-connect/token";
 
         Client client = ClientBuilder.newClient();
@@ -161,8 +174,22 @@ public class JdbcKeyCloak implements KeyCloakRepository {
                 .post(Entity.form(form));
 
         String json = response.readEntity(String.class);
-        // TODO : parser le JSON pour récupérer "access_token"
-        return json;
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        try{
+            JsonNode node = mapper.readTree(json);
+
+            return new KeycloakTokenDTO(
+                    node.get("access_token").asText(),
+                    node.get("refresh_token").asText(),
+                    node.get("expires_in").asLong(),
+                    node.get("refresh_expires_in").asLong()
+            );
+        }catch(Exception e){
+            throw new RuntimeException("Failed to parse token response", e);
+
+        }
     }
 
 }

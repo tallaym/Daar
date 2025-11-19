@@ -25,7 +25,7 @@ public class Main {
 
         Javalin app = Javalin.create().start(7000);
         app.get("/", ctx -> ctx.result("Marhaba fi Daar API"));
-            new UserController(appContext.userService, appContext.authService).registerRoutes(app);
+            new UserController(appContext.userService).registerRoutes(app);
             new AuthController(appContext.authService).registerRoutes(app);
 
         System.out.println("Server started on port 7000");

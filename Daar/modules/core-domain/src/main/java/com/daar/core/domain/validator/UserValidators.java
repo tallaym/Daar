@@ -30,14 +30,14 @@ public class UserValidators {
         validateUUID(creatorId.toString());
     }
 
-    public static void updateUserValidator(String firstname, String lastname, String origin, String identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+    public static void updateUserValidator(String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         StringValidators.validateFirstname(firstname);
         StringValidators.validateLastname(lastname);
         StringValidators.validatePhone(phone);
 
         if(origin != null) StringValidators.validateOrigin(origin);
         if(email != null) StringValidators.validateEmail(email);
-        if(identityType != null && identityNumber != null) validateIdentity(identityType, identityNumber);
+        if(identityType != null && identityNumber != null) validateIdentity(String.valueOf(identityType), identityNumber);
         if(suspendedUntil != null) DateValidators.validateFuture(suspendedUntil);
         if(updatedBy != null) validateUUID(updatedBy.toString());
         if(suspendedBy != null) validateUUID(suspendedBy.toString());

@@ -2,9 +2,12 @@ package com.daar.core.application.service.auth;
 
 
 import com.daar.core.domain.model.auth.User;
-import com.daar.core.port.in.dto.user.*;
+import com.daar.core.domain.service.UserManagement;
+import com.daar.core.port.in.dto.auth.CreateUserCommand;
+import com.daar.core.port.in.dto.auth.UpdateUserCommand;
+import com.daar.core.port.in.dto.auth.user.UserDTO;
 import com.daar.core.port.in.usecase.auth.UserUseCase;
-import com.daar.core.port.out.auth.UserRepository;
+import com.daar.core.domain.port_out.auth.UserRepository;
 
 import java.util.Date;
 import java.util.List;
@@ -15,42 +18,47 @@ public class UserService implements UserUseCase {
 
 
     private final UserRepository ur;
+    private final UserManagement um;
 
-    public UserService(UserRepository ur) {
-        this.ur = ur;
+    public UserService(UserRepository ur, UserManagement um) {
+        this.ur = ur; this.um = um;
     }
 
-    public UserDTO create(CreateUserCommand command) {
-
-
-        User u = new User(command.getFirstname(), command.getLastname(), command.getPhone(), command.getKeycloakId(), command.getCreatedBy());
-
-            ur.insert(u);
-
-        return new UserDTO(u.getId(), u.getKeycloakId(), u.getFirstname(), u.getLastname(), u.getPhone(),u.getCreatedBy());
+    public UserDTO createUser(CreateUserCommand command) {
+        User user  = new User(
+                command.getFirstname(),
+                command.getLastname(),
+                command.getPhone(),
+                null,
+                command.getCreatedBy()
+        );
+        return mapToDTO(um.createUser(user));
     }
 
-    public UserDTO modify(UUID userId, UpdateUserCommand dto) {
-        User user = ur.findById(userId).orElseThrow(() -> new RuntimeException("user not found"));
+    public UserDTO updateUser(UpdateUserCommand command) {
+        User existing = ur.findById(command.getId()).orElseThrow(() -> new RuntimeException("User not found"));
 
-        user.setFirstname(dto.getFirstname());
-        user.setLastname(dto.getLastname());
-        user.setOrigin(dto.getOrigin());
-        user.setIdentityType(dto.getIdentityType());
-        user.setIdentityNumber(dto.getIdentityNumber());
-        user.setEmail(dto.getEmail());
-        user.setAddress(dto.getAddress());
-        user.setPhone(dto.getPhone());
-        user.setUpdatedAt(dto.getUpdatedAt());
-        user.setUpdatedBy(dto.getUpdatedBy());
-        user.setSuspendedBy(dto.getSuspendedBy());
-        user.setSuspendedUntil(dto.getSuspendedUntil());
+        User updated = new User(
+                existing.getId(),
+                existing.getKeycloakId(),
+                command.getFirstname(),
+                command.getLastname(),
+                command.getOrigin(),
+                command.getIdentityType(),
+                command.getIdentityNumber(),
+                command.getAddress(),
+                command.getEmail(),
+                command.getPhone(),
+                existing.getCreatedAt(),
+                existing.getUpdatedAt(),
+                command.getSuspendedUntil(),
+                existing.getCreatedBy(),
+                command.getUpdatedBy(),
+                command.getSuspendedBy()
+        );
 
-                ur.update(user);
 
-
-
-        return mapToDTO(user);
+        return mapToDTO(um.updateUser(existing));
     }
 
     @Override

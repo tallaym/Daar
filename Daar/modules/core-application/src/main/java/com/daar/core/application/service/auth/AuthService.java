@@ -1,8 +1,15 @@
 package com.daar.core.application.service.auth;
 
-import com.daar.core.port.in.dto.login.*;
+import com.daar.core.application.service.KeycloakTokenMapper;
+import com.daar.core.port.in.dto.auth.login.AuthDTO;
+import com.daar.core.port.in.dto.auth.login.cmd.*;
+import com.daar.core.port.in.dto.auth.login.query.KeycloakData;
+import com.daar.core.port.in.dto.auth.login.query.LoginQuery;
+import com.daar.core.port.in.dto.auth.login.query.LogoutQuery;
+import com.daar.core.port.in.dto.auth.login.query.RefreshTokenQuery;
 import com.daar.core.port.in.usecase.auth.AuthUseCase;
-import com.daar.core.port.out.auth.KeyCloakRepository;
+import com.daar.core.domain.port_out.KeycloakTokenDTO;
+import com.daar.core.domain.port_out.auth.KeyCloakRepository;
 
 public class AuthService implements AuthUseCase {
 
@@ -13,55 +20,28 @@ public class AuthService implements AuthUseCase {
     }
 
 
-    @Override
-    public AuthDTO<String> register(RegisterUserCommand command) {
-
-            String keycloakId = kr.createUser(command.getFirstname(), command.getLastname(),
-                    command.getPhone());
-            if(keycloakId != null) {
-                return new AuthDTO<>(true, "Registration successful. Keycloak ID: " + keycloakId);
-            }   else {
-                return new AuthDTO<>(false, "Registration failed.");
-            }
-    }
-
 
     @Override
-    public AuthDTO<Void> updateUser(UpdateKeyCloakUserCommand command) {
-        boolean updated = kr.updateUser(command.getKeyCloakId(), command.getFirstname(),
-                command.getLastname(), command.getPhone());
-        return updated
-                ? new AuthDTO<>(true, "User updated successfully.")
-                : new AuthDTO<>(false, "User update failed.");
-    }
+    public AuthDTO<KeycloakData> login(LoginQuery query) {
+        KeycloakTokenDTO rawData = kr.login(query.getIdentifier(), query.getPassword());
+        KeycloakData data = KeycloakTokenMapper.toDomain(rawData);
 
-    @Override
-    public AuthDTO<Void> deleteUser(DeleteCommand command) {
-        boolean deleted = kr.deleteUser(command.getKeyCloakId());
+        if(data != null) {
 
-        return deleted
-                ? new AuthDTO<>(true, "User deleted successfully.")
-                : new AuthDTO<>(false, "User deletion failed.");
-    }
-
-    @Override
-    public AuthDTO<String> login(LoginQuery query) {
-        String accessToken = kr.login(query.getIdentifier(), query.getPassword());
-
-        if(accessToken != null) {
-            return new AuthDTO<>(true, "Login successful. Access Token: " + accessToken);
+            return new AuthDTO<>(true, "Login successful. Access Token: ", data, data.accessTokenExpiry(), data.refreshTokenExpiry());
         }   else {
-            return new AuthDTO<>(false, "Login failed.");
+            return new AuthDTO<>(false, "Login failed.", null, null, null);
         }
     }
 
     @Override
-    public AuthDTO<String> refreshToken(RefreshTokenQuery query) {
-        String newAccessToken = kr.refreshToken(query.getRefreshToken());
+    public AuthDTO<KeycloakData> refreshToken(RefreshTokenQuery query) {
+        KeycloakTokenDTO rawData = kr.refreshToken(query.getRefreshToken());
+        KeycloakData data = KeycloakTokenMapper.toDomain(rawData);
 
-        return newAccessToken != null
-                ? new AuthDTO<>(true, "Token refreshed successfully. New Access Token: " + newAccessToken)
-                : new AuthDTO<>(false, "Token refresh failed.");
+        return data != null
+                ? new AuthDTO<>(true, "Token refreshed successfully. New Access Token: ", data, data.accessTokenExpiry(), data.refreshTokenExpiry())
+                : new AuthDTO<>(false, "Token refresh failed.", null, null,null);
     }
 
     @Override

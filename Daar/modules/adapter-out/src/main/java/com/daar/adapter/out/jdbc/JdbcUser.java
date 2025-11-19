@@ -2,7 +2,7 @@ package com.daar.adapter.out.jdbc;
 
 
 import com.daar.core.domain.model.auth.User;
-import com.daar.core.port.out.auth.UserRepository;
+import com.daar.core.domain.port_out.auth.UserRepository;
 
 import javax.sql.DataSource;
 import java.sql.*;

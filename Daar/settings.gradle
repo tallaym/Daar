@@ -9,9 +9,6 @@ project (':core-application').projectDir = file('modules/core-application')
 include 'core-port-in'
 project (':core-port-in').projectDir = file('modules/core-port-in')
 
-include 'core-port-out'
-project (':core-port-out').projectDir = file('modules/core-port-out')
-
 include 'adapter-in'
 project (':adapter-in').projectDir = file('modules/adapter-in')
 

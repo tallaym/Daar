@@ -161,4 +161,14 @@ Focus sur les classes de base : user, mdp, document et permissions
     ils ont révélé plusieurs failles dans l'architecture
     + ajout de class (handler) pour simplifier les controllers et donc les tests
     - reduction de certaines requests/query parasites
+
+>> Mardi 18/11
+> Refactoring : 
+    nouveau domain service pour centraliser méthodes communes
+    port_out ajoutés au domain pour conformité
+    suppression du code redondant
+    constructeur sain pour le userService(application)
+
+> STATE
+    compléter AuthHandler, puis tester
  

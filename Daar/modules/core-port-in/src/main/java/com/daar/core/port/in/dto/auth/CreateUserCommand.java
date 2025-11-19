@@ -1,27 +1,30 @@
-package com.daar.adapter.in.rest.request.user;
+package com.daar.core.port.in.dto.auth;
 
 import java.util.UUID;
 
-public class CreateUserRequest {
+public class CreateUserCommand {
 
-    String firstname, lastname, phone, keyCloakId;
+    String firstname, lastname, phone;
+    String KeycloakId;
     UUID createdBy;
 
-    public CreateUserRequest(String firstname, String lastname, String phone, String keyCloakId, UUID createdBy) {
+    public CreateUserCommand() {
+    }
+
+    public CreateUserCommand(String firstname, String lastname, String phone, String keycloakId, UUID createdBy) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.phone = phone;
-        this.keyCloakId = keyCloakId;
+        KeycloakId = keycloakId;
         this.createdBy = createdBy;
     }
 
-
-    public String getKeyCloakId() {
-        return keyCloakId;
+    public String getKeycloakId() {
+        return KeycloakId;
     }
 
-    public void setKeyCloakId(String keyCloakId) {
-        this.keyCloakId = keyCloakId;
+    public void setKeycloakId(String keycloakId) {
+        KeycloakId = keycloakId;
     }
 
     public String getFirstname() {

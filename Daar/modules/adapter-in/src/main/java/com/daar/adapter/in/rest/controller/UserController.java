@@ -6,8 +6,8 @@ import com.daar.adapter.in.rest.request.user.*;
 import com.daar.adapter.in.rest.response.user.UserResponse;
 import com.daar.core.domain.validator.DateValidators;
 import com.daar.core.domain.validator.UserValidators;
-import com.daar.core.port.in.dto.user.*;
-import com.daar.core.port.in.usecase.auth.AuthUseCase;
+import com.daar.core.port.in.dto.auth.user.UserDTO;
+
 import com.daar.core.port.in.usecase.auth.UserUseCase;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -26,8 +26,8 @@ public class UserController {
 
 
 
-    public UserController(UserUseCase useCase, AuthUseCase authUseCase) {
-        this.userHandler = new UserHandler(useCase, authUseCase);
+    public UserController(UserUseCase useCase) {
+        this.userHandler = new UserHandler(useCase);
     }
 
 
