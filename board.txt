@@ -171,4 +171,15 @@ Focus sur les classes de base : user, mdp, document et permissions
 
 > STATE
     compléter AuthHandler, puis tester
+
+
+>>Jeudi 20/11
+> Refactoring envisagé pour les usecase et application
+
+> controller complété
+
+> test du domain 
+    validators
+
+
  

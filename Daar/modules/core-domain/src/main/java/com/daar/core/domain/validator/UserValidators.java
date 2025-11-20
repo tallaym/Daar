@@ -30,7 +30,7 @@ public class UserValidators {
         validateUUID(creatorId.toString());
     }
 
-    public static void updateUserValidator(String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant updatedAt, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
+    public static void updateUserValidator(String firstname, String lastname, String origin, User.IdentityType identityType, String identityNumber, String address, String email, String phone, Instant suspendedUntil, UUID updatedBy, UUID suspendedBy) {
         StringValidators.validateFirstname(firstname);
         StringValidators.validateLastname(lastname);
         StringValidators.validatePhone(phone);

@@ -15,7 +15,6 @@ tasks.withType(JavaCompile).configureEach {
 }*/
 dependencies {
     implementation project(':core-domain')
-    implementation project(':core-port-out')
 
     implementation 'org.postgresql:postgresql:42.7.7'
     implementation 'com.zaxxer:HikariCP:5.0.1'

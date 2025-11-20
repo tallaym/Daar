@@ -5,7 +5,6 @@ plugins {
 dependencies {
     implementation project(':core-domain')
     implementation project(':core-port-in')
-    implementation project(':core-port-out')
 
 }
 java {

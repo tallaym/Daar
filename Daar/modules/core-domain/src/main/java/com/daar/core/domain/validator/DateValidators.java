@@ -25,14 +25,14 @@ public class DateValidators {
         }
     }
 
-    public static void validatePast(Instant date) {
+    public static void validateFuture(Instant date) {
         Instant now = Instant.now();
         if (date.isAfter(now)) {
             throw new IllegalArgumentException("La date ne peut pas être dans le futur.");
         }
     }
 
-    public static void validateFuture(Instant date) {
+    public static void validatePast(Instant date) {
         Instant now = Instant.now();
         if (date.isBefore(now)) {
             throw new IllegalArgumentException("La date ne peut pas être dans le passé.");

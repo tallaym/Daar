@@ -9,6 +9,7 @@ import com.daar.core.application.service.auth.AuthService;
 import com.daar.core.application.service.auth.UserService;
 import com.daar.core.application.service.document.DocumentService;
 import com.daar.core.application.service.document.TypeService;
+import com.daar.core.domain.service.UserManagement;
 
 import javax.sql.DataSource;
 
@@ -52,8 +53,10 @@ public class AppContext {
         documentRepo = new JdbcDocument(ds);
         typeRepo = new JdbcType(ds);
 
+        UserManagement userManagement = new UserManagement(userRepo, keyCloakRepo);
+
         // --- Initialisation des services ---
-        userService = new UserService(userRepo);
+        userService = new UserService(userRepo, userManagement);
         authService = new AuthService(keyCloakRepo);
         documentService = new DocumentService(documentRepo);
         typeService = new TypeService(typeRepo);

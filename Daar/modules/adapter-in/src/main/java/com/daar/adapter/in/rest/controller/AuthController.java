@@ -5,11 +5,7 @@ import com.daar.adapter.in.rest.mapper.AuthMapper;
 import com.daar.adapter.in.rest.request.auth.*;
 import com.daar.adapter.in.rest.response.auth.AuthResponse;
 import com.daar.core.port.in.dto.auth.login.AuthDTO;
-import com.daar.core.port.in.dto.auth.login.cmd.*;
 import com.daar.core.port.in.dto.auth.login.query.KeycloakData;
-import com.daar.core.port.in.dto.auth.login.query.LoginQuery;
-import com.daar.core.port.in.dto.auth.login.query.LogoutQuery;
-import com.daar.core.port.in.dto.auth.login.query.RefreshTokenQuery;
 import com.daar.core.port.in.usecase.auth.AuthUseCase;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -19,8 +15,8 @@ public class AuthController {
     private final AuthHandler handler;
 
 
-    public AuthController(AuthHandler handler) {
-        this.handler = handler;
+    public AuthController(AuthUseCase useCase) {
+        this.handler = new AuthHandler(useCase);
     }
 
 
@@ -41,38 +37,37 @@ public class AuthController {
 
     public void loginHandler(Context ctx){
         LoginRequest request = ctx.bodyAsClass(LoginRequest.class);
-        AuthDTO<KeycloakData> response = handler.login(request);
-
-        AuthResponse<> authResponse = AuthMapper.toResponse(response);
+        AuthDTO<KeycloakData> dto = handler.login(request);
+        AuthResponse<Object> response = AuthMapper.toResponse(dto);
         ctx.json(response).status(200);
     }
 
     public void refreshTokenHandler(Context ctx){
         RefreshTokenRequest request = ctx.bodyAsClass(RefreshTokenRequest.class);
-        RefreshTokenQuery query = AuthMapper.toQuery(request);
-        AuthDTO<KeycloakData> response = handler.refreshToken(query);
+        AuthDTO<KeycloakData> dto = handler.refreshToken(request);
+        AuthResponse<Object> response = AuthMapper.toResponse(dto);
         ctx.json(response).status(200);
     }
 
     public void logoutHandler(Context ctx){
         LogoutRequest request = ctx.bodyAsClass(LogoutRequest.class);
-        LogoutQuery query = AuthMapper.toQuery(request);
-        AuthDTO<Void> response = useCase.logout(query);
+        AuthDTO<Void> dto = handler.logout(request);
+        AuthResponse<Object> response = AuthMapper.toResponse(dto);
         ctx.json(response).status(200);
     }
 
 
     public void changePasswordHandler(Context ctx){
         ChangePasswordRequest request = ctx.bodyAsClass(ChangePasswordRequest.class);
-        ChangePasswordCommand command = AuthMapper.toCommand(request);
-        AuthDTO<Void> response = useCase.changePassword(command);
+        AuthDTO<Void> dto = handler.changePassword(request);
+        AuthResponse<Object> response = AuthMapper.toResponse(dto);
         ctx.json(response).status(200);
     }
 
     public void resetPasswordHandler(Context ctx){
         ResetPasswordRequest request = ctx.bodyAsClass(ResetPasswordRequest.class);
-        ResetPasswordCommand command = AuthMapper.toCommand(request);
-        AuthDTO<Void> response = useCase.resetPassword(command);
+        AuthDTO<Void> dto = handler.resetPassword(request);
+        AuthResponse<Object> response = AuthMapper.toResponse(dto);
         ctx.json(response).status(200);
     }
 

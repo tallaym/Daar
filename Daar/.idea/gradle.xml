@@ -14,7 +14,6 @@
             <option value="$PROJECT_DIR$/modules/core-application" />
             <option value="$PROJECT_DIR$/modules/core-domain" />
             <option value="$PROJECT_DIR$/modules/core-port-in" />
-            <option value="$PROJECT_DIR$/modules/core-port-out" />
           </set>
         </option>
       </GradleProjectSettings>
