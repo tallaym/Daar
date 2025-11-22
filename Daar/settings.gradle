@@ -3,11 +3,9 @@ rootProject.name = 'Daar'
 include 'core-domain'
 project (':core-domain').projectDir = file('modules/core-domain')
 
-include 'core-application'
-project (':core-application').projectDir = file('modules/core-application')
+include 'core-usecase'
+project (':core-usecase').projectDir = file('modules/core-usecase')
 
-include 'core-port-in'
-project (':core-port-in').projectDir = file('modules/core-port-in')
 
 include 'adapter-in'
 project (':adapter-in').projectDir = file('modules/adapter-in')

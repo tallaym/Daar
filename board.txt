@@ -182,4 +182,21 @@ Focus sur les classes de base : user, mdp, document et permissions
     validators
 
 
- 
+>>Samedi 22/11
+> Refactoring
+    dto, command, query, request, response passent en record
+    fusion entre port-in et application qui donne usecase
+
+> Domain
+    simplification du model user avec Lombok
+
+> Tests
+    + domain : sur le service et les validators
+    + infra/adapter-out : sur le dataProvider et notre implémentation repo user (celui de Keycloak lui est devoué)
+    
+    * les usecases agissent selon les repositories, donc juste tester ces derniers. (ici leur impl)
+    ** ajout d'une dépendance pour les tests jdbc pour complète simulation(test conatainers)
+
+> STATE
+    check l'erreur sur les tests vaildatoes
+    compléter le test sur web/adapter-in

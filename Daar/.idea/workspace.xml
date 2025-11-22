@@ -5,17 +5,85 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2c40fd71-d93c-4c8f-b27b-f594457fe27b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/response/AuthResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/command/ChangePasswordCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/command/CreateUserCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/command/ResetPasswordCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/command/UpdateUserCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/dto/AuthDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/dto/BasicUserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/dto/UserDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/query/LoginQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/query/LogoutQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/query/RefreshTokenQuery.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/usecase/AuthUseCase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/handler/AuthHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/handler/AuthHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/Controllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/Controllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/handler/AuthHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/controller/handler/AuthHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/controller/handler/UserHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/controller/handler/UserHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/mapper/AuthMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/mapper/AuthMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/mapper/UserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/auth/ChangePasswordRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/ChangePasswordRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/auth/DeleteRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/DeleteRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/auth/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/auth/LogoutRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/LogoutRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/auth/RefreshTokenRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/RefreshTokenRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/auth/ResetPasswordRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/ResetPasswordRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/user/CreateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/CreateUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/request/user/UpdateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/request/UpdateUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/response/auth/AuthResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/response/user/CreateUserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/response/CreateUserResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/response/user/UserResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/main/java/com/daar/adapter/in/rest/auth/response/UserResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-in/src/test/java/com/daar/adapter/in/rest/controller/UserControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-in/src/test/java/com/daar/adapter/in/rest/controller/UserControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/adapter-out/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-out/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/config/DataSourceProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/config/AppDataSourceProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/JdbcKeyCloak.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/JdbcKeyCloak.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/JdbcUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/JdbcUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/document/JdbcDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/document/JdbcDocument.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/document/JdbcType.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/adapter-out/src/main/java/com/daar/adapter/out/jdbc/document/JdbcType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/boot/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/boot/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/AppContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/AppContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/core-application/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-application/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/validator/DateValidators.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/validator/DateValidators.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/validator/UserValidators.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/validator/UserValidators.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/boot/src/main/java/com/daar/boot/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/KeycloakTokenMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/KeycloakTokenMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/auth/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/usecase/impl/AuthUseCaseImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/auth/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/usecase/impl/UserUseCaseImplementation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/document/DocumentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/document/usecase/impl/DocumentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-application/src/main/java/com/daar/core/application/service/document/TypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/document/usecase/impl/TypeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/model/auth/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/model/auth/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/KeycloakTokenDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/KeycloakTokenDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/auth/KeyCloakRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/auth/KeyCloakRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/auth/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/auth/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/document/DocumentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/document/DocumentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/document/NotificationPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/document/NotificationPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/document/PdfGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/document/PdfGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/port_out/document/TypeDocumentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/repository/document/TypeDocumentRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/service/UserManagement.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-domain/src/main/java/com/daar/core/domain/service/UserManagement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/main/java/module-info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-domain/src/test/java/com/daar/core/domain/model/auth/UserTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/CreateUserCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/UpdateUserCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/AuthDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/cmd/ChangePasswordCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/cmd/ResetPasswordCommand.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/query/KeycloakData.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/query/KeycloakData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/query/LoginQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/query/LogoutQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/login/query/RefreshTokenQuery.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/user/BasicUserDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/dto/auth/user/UserDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/usecase/auth/AuthUseCase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/usecase/auth/UserUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/auth/usecase/UserUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/usecase/document/DocumentUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/document/usecase/DocumentUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/core-port-in/src/main/java/com/daar/core/port/in/usecase/document/TypeUseCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/modules/core-usecase/src/main/java/com/daar/core/usecase/document/usecase/TypeUseCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +101,7 @@
         <option value="Record" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -53,16 +122,32 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Gradle.Build Daar.executor": "Run",
     "Gradle.Daar.executor": "Debug",
     "Gradle.Daar:modules:boot [:boot:Main.main()].executor": "Run",
-    "Gradle.DateValidatorTest.validateToInstant_shouldReturnInstant_whenValidDate.executor": "Run",
+    "Gradle.DateValidatorTest.validateToInstant_shouldReturnInstant_whenValidDate.executor": "Debug",
     "Gradle.DateValidatorsTest.validateToInstant_shouldReturnInstant_whenValidDate.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true"
+    "kotlin-language-version-configured": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.daar.core.domain.port_out.auth" />
+      <recent name="com.daar.adapter.out.jdbc" />
+      <recent name="com.daar.adapter.out.config" />
+      <recent name="com.daar.core.domain.service" />
+      <recent name="com.daar.core.domain.model.auth" />
+    </key>
+  </component>
   <component name="RunManager" selected="Gradle.DateValidatorTest.validateToInstant_shouldReturnInstant_whenValidDate">
     <configuration name="DateValidatorTest.validateToInstant_shouldReturnInstant_whenValidDate" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>

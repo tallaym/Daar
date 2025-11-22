@@ -1,7 +1,7 @@
 package com.daar.adapter.out.jdbc.document;
 
 import com.daar.core.domain.model.document.TypeDocument;
-import com.daar.core.domain.port_out.document.TypeDocumentRepository;
+import com.daar.core.domain.repository.document.TypeDocumentRepository;
 
 import javax.sql.DataSource;
 import java.sql.*;

@@ -5,8 +5,7 @@ plugins {
 
 dependencies {
     implementation project(':core-domain')
-    implementation project(':core-port-in')
-    implementation project(':core-application')
+    implementation project(':core-usecase')
     implementation project(':adapter-in')
     implementation project(':adapter-out')
 

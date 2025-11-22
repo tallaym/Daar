@@ -1,8 +1,8 @@
 package com.daar.core.domain.service;
 
 import com.daar.core.domain.model.auth.User;
-import com.daar.core.domain.port_out.auth.KeyCloakRepository;
-import com.daar.core.domain.port_out.auth.UserRepository;
+import com.daar.core.domain.repository.auth.KeyCloakRepository;
+import com.daar.core.domain.repository.auth.UserRepository;
 
 public class UserManagement {
 

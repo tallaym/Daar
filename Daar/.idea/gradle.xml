@@ -11,9 +11,8 @@
             <option value="$PROJECT_DIR$/modules/adapter-in" />
             <option value="$PROJECT_DIR$/modules/adapter-out" />
             <option value="$PROJECT_DIR$/modules/boot" />
-            <option value="$PROJECT_DIR$/modules/core-application" />
             <option value="$PROJECT_DIR$/modules/core-domain" />
-            <option value="$PROJECT_DIR$/modules/core-port-in" />
+            <option value="$PROJECT_DIR$/modules/core-usecase" />
           </set>
         </option>
       </GradleProjectSettings>

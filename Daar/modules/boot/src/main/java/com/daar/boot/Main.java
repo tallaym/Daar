@@ -1,9 +1,9 @@
 package com.daar.boot;
 
-import com.daar.adapter.in.rest.controller.AuthController;
-import com.daar.adapter.in.rest.controller.UserController;
+import com.daar.adapter.in.rest.auth.controller.AuthController;
+import com.daar.adapter.in.rest.auth.controller.UserController;
 import com.daar.adapter.out.config.DB;
-import com.daar.adapter.out.config.DataSourceProvider;
+import com.daar.adapter.out.config.AppDataSourceProvider;
 import io.javalin.Javalin;
 
 import javax.sql.DataSource;
@@ -19,14 +19,14 @@ public class Main {
                 "org.postgresql.Driver"
         );
 
-        DataSource ds = new DataSourceProvider(dbconfig).createDataSource();
+        DataSource ds = new AppDataSourceProvider(dbconfig).createDataSource();
 
         AppContext appContext = new AppContext(ds);
 
         Javalin app = Javalin.create().start(7000);
         app.get("/", ctx -> ctx.result("Marhaba fi Daar API"));
-            new UserController(appContext.userService).registerRoutes(app);
-            new AuthController(appContext.authService).registerRoutes(app);
+            new UserController(appContext.userUseCaseImplementation).registerRoutes(app);
+            new AuthController(appContext.authUseCaseImplementation).registerRoutes(app);
 
         System.out.println("Server started on port 7000");
     }

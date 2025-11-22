@@ -1,19 +1,11 @@
 package com.daar.adapter.in.rest.controller;
 
-import com.daar.adapter.in.rest.request.user.CreateUserRequest;
-import com.daar.core.port.in.dto.auth.login.AuthDTO;
-import com.daar.core.port.in.dto.auth.CreateUserCommand;
-import com.daar.core.port.in.dto.auth.user.UserDTO;
-import com.daar.core.port.in.usecase.auth.AuthUseCase;
-import com.daar.core.port.in.usecase.auth.UserUseCase;
-import io.javalin.Javalin;
+import com.daar.adapter.in.rest.auth.controller.UserController;
+import com.daar.core.usecase.auth.usecase.AuthUseCase;
+import com.daar.core.usecase.auth.usecase.UserUseCase;
 import io.javalin.http.Context;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 
-
-import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

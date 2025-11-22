@@ -1,7 +1,7 @@
 package com.daar.adapter.out.jdbc;
 
-import com.daar.core.domain.port_out.KeycloakTokenDTO;
-import com.daar.core.domain.port_out.auth.KeyCloakRepository;
+import com.daar.core.domain.repository.KeycloakTokenDTO;
+import com.daar.core.domain.repository.auth.KeyCloakRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.keycloak.OAuth2Constants;
