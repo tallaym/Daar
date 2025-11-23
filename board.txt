@@ -200,3 +200,10 @@ Focus sur les classes de base : user, mdp, document et permissions
 > STATE
     check l'erreur sur les tests vaildatoes
     compléter le test sur web/adapter-in
+
+
+>> Dimanche 23/11
+> Debug....
+
+> STATE
+    ajout de middleware pour les controllers

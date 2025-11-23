@@ -3,7 +3,7 @@ package com.daar.adapter.in.rest.auth.controller.handler;
 import com.daar.adapter.in.rest.auth.request.CreateUserRequest;
 import com.daar.adapter.in.rest.auth.request.UpdateUserRequest;
 import com.daar.adapter.in.rest.auth.mapper.UserMapper;
-import com.daar.core.domain.validator.UserValidators;
+import com.daar.core.domain.validators.UserValidators;
 import com.daar.core.usecase.auth.command.CreateUserCommand;
 import com.daar.core.usecase.auth.command.UpdateUserCommand;
 import com.daar.core.usecase.auth.dto.UserDTO;
@@ -22,6 +22,7 @@ public class UserHandler {
     }
 
     public UserDTO insert(CreateUserRequest userRequest){
+
         UserValidators.newUserValidator(
                 userRequest.firstname(),
                 userRequest.lastname(),
@@ -41,7 +42,6 @@ public class UserHandler {
                 request.origin(),
                 request.identityType(),
                 request.identityNumber(),
-                request.address(),
                 request.email(),
                 request.phone(),
                 request.suspendedUntil(),
@@ -67,9 +67,6 @@ public class UserHandler {
         return useCase.addedAfter(date);
     }
 
-    public List<UserDTO> getByDate(Date start, Date end){
-        return useCase.addedBetween(start, end);
-    }
 
 
 }

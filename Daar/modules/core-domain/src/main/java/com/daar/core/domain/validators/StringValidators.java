@@ -1,4 +1,4 @@
-package com.daar.core.domain.validator;
+package com.daar.core.domain.validators;
 
 import java.util.Arrays;
 import java.util.Locale;

@@ -3,103 +3,92 @@ package com.daar.adapter.out.jdbc;
 import com.daar.adapter.out.config.AppDataSourceProvider;
 import com.daar.adapter.out.config.DB;
 import com.daar.core.domain.model.auth.User;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JdbcUserTest {
 
-    static DataSource dataSource;
-    JdbcUser jdbcUser;
-
-    @BeforeAll
-    static void setupDatabase() throws Exception {
-        dataSource = new AppDataSourceProvider(DB.defaultH2()).createDataSource();
-        try (Connection conn = dataSource.getConnection();
-             Statement stmt = conn.createStatement()) {
-
-            stmt.execute("""
-                CREATE TABLE users(
-                    id UUID PRIMARY KEY,
-                    firstname VARCHAR(50),
-                    lastname VARCHAR(50),
-                    phone VARCHAR(20),
-                    keyCloakId VARCHAR(50),
-                    origin VARCHAR(50),
-                    identityType VARCHAR(20),
-                    identityNumber VARCHAR(50),
-                    address VARCHAR(100),
-                    email VARCHAR(50),
-                    createdAt TIMESTAMP,
-                    updatedAt TIMESTAMP,
-                    suspendedUntil TIMESTAMP,
-                    createdBy UUID,
-                    updatedBy UUID,
-                    suspendedBy UUID
-                )
-                """);
-        }
-    }
+    private JdbcUser userRepo;
 
     @BeforeEach
-    void init() {
-        jdbcUser = new JdbcUser(dataSource);
+    void setup() throws Exception {
+        DB h2Config = new DB("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL", "sa", "", "org.h2.Driver", 10, 2, 30000, 30000);
+        AppDataSourceProvider provider = new AppDataSourceProvider(h2Config);
+        DataSource ds = provider.getDataSource();
+
+        try (Connection conn = ds.getConnection(); Statement stmt = conn.createStatement()) {
+            stmt.execute("DROP TABLE IF EXISTS users");
+            stmt.execute("CREATE TABLE users (" +
+                    "id VARCHAR(36) PRIMARY KEY," +
+                    "firstname VARCHAR(50)," +
+                    "lastname VARCHAR(50)," +
+                    "phone VARCHAR(20)," +
+                    "keyCloakId VARCHAR(50)," +
+                    "createdBy VARCHAR(36)," +
+                    "updatedBy VARCHAR(36)," +
+                    "suspendedBy VARCHAR(36)," +
+                    "origin VARCHAR(50)," +
+                    "identityType VARCHAR(20)," +
+                    "identityNumber VARCHAR(50)," +
+                    "address VARCHAR(100)," +
+                    "email VARCHAR(50)," +
+                    "createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
+                    "updatedAt TIMESTAMP," +
+                    "suspendedUntil TIMESTAMP" +
+                    ");");
+        }
+
+        userRepo = new JdbcUser(ds);
     }
 
     @Test
-    void testInsertAndFindById() {
+    void insertAndFindUser() {
         User user = new User();
         user.setId(UUID.randomUUID());
-        user.setFirstname("John");
-        user.setLastname("Doe");
+        user.setFirstname("Alice");
+        user.setLastname("Dupont");
         user.setPhone("123456789");
-        user.setKeycloakId("kc-123");
         user.setCreatedBy(UUID.randomUUID());
+        user.setKeycloakId("kc-1");
 
-        User inserted = jdbcUser.insert(user);
-        assertNotNull(inserted.getId());
 
-        Optional<User> fetched = jdbcUser.findById(user.getId());
-        assertTrue(fetched.isPresent());
-        assertEquals("John", fetched.get().getFirstname());
+        userRepo.insert(user);
+
+        User found = userRepo.findById(user.getId()).orElseThrow();
+        assertEquals("Alice", found.getFirstname());
+        assertEquals("123456789", found.getPhone());
+
+        List<User> allUsers = userRepo.findAll();
+        assertEquals(1, allUsers.size());
     }
 
     @Test
-    void testUpdateUser() {
+    void updateUser() {
         User user = new User();
         user.setId(UUID.randomUUID());
-        user.setFirstname("Jane");
-        user.setLastname("Smith");
+        user.setFirstname("Bob");
+        user.setLastname("Martin");
         user.setPhone("987654321");
-        user.setKeycloakId("kc-987");
         user.setCreatedBy(UUID.randomUUID());
-        jdbcUser.insert(user);
+        user.setKeycloakId("kc-2");
 
-        user.setFirstname("Janet");
-        user.setPhone("111222333");
-        User updated = jdbcUser.update(user);
+        userRepo.insert(user);
 
-        assertEquals("Janet", updated.getFirstname());
-        Optional<User> fetched = jdbcUser.findById(user.getId());
-        assertTrue(fetched.isPresent());
-        assertEquals("111222333", fetched.get().getPhone());
+        user.setFirstname("Bobby");
+        userRepo.update(user);
+
+        User updated = userRepo.findById(user.getId()).orElseThrow();
+        assertEquals("Bobby", updated.getFirstname());
     }
 
-    @Test
-    void testFindAll() {
-        jdbcUser.insert(new User(UUID.randomUUID(), null, "A", "B", null, null, null, null, null, null, Instant.now(), null, null, UUID.randomUUID(), null, null));
-        jdbcUser.insert(new User(UUID.randomUUID(), null, "C", "D", null, null, null, null, null, null, Instant.now(), null, null, UUID.randomUUID(), null, null));
-
-        List<User> users = jdbcUser.findAll();
-        assertTrue(users.size() >= 2);
-    }
-
-}
+   }

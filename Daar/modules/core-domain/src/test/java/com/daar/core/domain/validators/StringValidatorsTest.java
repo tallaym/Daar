@@ -1,4 +1,4 @@
-package com.daar.core.domain.validator;
+package com.daar.core.domain.validators;
 
 import org.junit.jupiter.api.Test;
 
@@ -73,7 +73,7 @@ class StringValidatorsTest {
 
     @Test
     void validateCNI_shouldPassForValidCNI() {
-        assertThatCode(() -> StringValidators.validateCNI("123456789032"))
+        assertThatCode(() -> StringValidators.validateCNI("1234567890326"))
                 .doesNotThrowAnyException();
     }
 

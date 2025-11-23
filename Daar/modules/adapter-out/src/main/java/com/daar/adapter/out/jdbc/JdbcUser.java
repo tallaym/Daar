@@ -29,7 +29,7 @@ public class JdbcUser implements UserRepository {
             try (Connection connection = dataSource.getConnection()) {
                 String sql = "INSERT INTO users(id, firstname, lastname, phone, createdBy, keyCloakId) VALUES (?,?,?,?,?,?)";
                 try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                    ps.setObject(1, user.getId());
+                    ps.setObject(1, user.getId().toString());
                     ps.setString(2, user.getFirstname());
                     ps.setString(3, user.getLastname());
                     ps.setString(4, user.getPhone());
@@ -57,7 +57,7 @@ public class JdbcUser implements UserRepository {
 
     @Override
     public User update(User user) {
-        String sql = "UPDATE users SET firstname=?, lastname=?, origin=?, identityType=?, identityNumber=?, address=?, email=?, phone=?, createdAt=?, updatedAt=?, suspendedUntil=?, createdBy=?, updatedBy=?, suspendedBy=?, keyCloak=? WHERE id=?";
+        String sql = "UPDATE users SET firstname=?, lastname=?, origin=?, identityType=?, identityNumber=?, address=?, email=?, phone=?, updatedAt=?, suspendedUntil=?, updatedBy=?, suspendedBy=?, keyCloakId=? WHERE id=?";
 
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -70,14 +70,12 @@ public class JdbcUser implements UserRepository {
             ps.setString(6, user.getAddress());
             ps.setString(7, user.getEmail());
             ps.setString(8, user.getPhone());
-            ps.setObject(9, user.getCreatedAt());
-            ps.setObject(10, user.getUpdatedAt());
-            ps.setObject(11, user.getSuspendedUntil());
-            ps.setObject(12, user.getCreatedBy());
-            ps.setObject(13, user.getUpdatedBy());
-            ps.setObject(14, user.getSuspendedBy());
-            ps.setString(15, user.getKeycloakId());
-            ps.setObject(16, user.getId());
+            ps.setObject(9, user.getUpdatedAt());
+            ps.setObject(10, user.getSuspendedUntil());
+            ps.setObject(11, user.getUpdatedBy());
+            ps.setObject(12, user.getSuspendedBy());
+            ps.setString(13, user.getKeycloakId());
+            ps.setObject(14, user.getId().toString());
 
             if (ps.executeUpdate() == 0) {
                 throw new RuntimeException("Utilisateur introuvable pour la mise à jour : " + user.getId());
@@ -98,7 +96,7 @@ public class JdbcUser implements UserRepository {
         try (Connection connection = dataSource.getConnection();
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
-            ps.setObject(1, id);
+            ps.setObject(1, id.toString());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return Optional.of(userTemplate(rs));
@@ -131,7 +129,7 @@ public class JdbcUser implements UserRepository {
 
     @Override
     public List<User> findAddedAfter(Date start) {
-        String sql = "SELECT * FROM users WHERE created_at > ?";
+        String sql = "SELECT * FROM users WHERE createdAt > ?";
         List<User> users = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
@@ -154,7 +152,7 @@ public class JdbcUser implements UserRepository {
 
     @Override
     public List<User> findAddedBetween(Date start, Date end) {
-        String sql = "SELECT * FROM users WHERE created_at BETWEEN ? AND ?";
+        String sql = "SELECT * FROM users WHERE createdAt BETWEEN ? AND ?";
         List<User> users = new ArrayList<>();
 
         try (Connection connection = dataSource.getConnection();
@@ -179,7 +177,7 @@ public class JdbcUser implements UserRepository {
 
     private User userTemplate(ResultSet rs) throws SQLException {
         User user = new User();
-        user.setId((UUID) rs.getObject("id"));
+        user.setId(UUID.fromString(rs.getString("id")));
         user.setKeycloakId(rs.getString("keyCloakId"));
         user.setFirstname(rs.getString("firstname"));
         user.setLastname(rs.getString("lastname"));
@@ -196,9 +194,14 @@ public class JdbcUser implements UserRepository {
         if (updatedTs != null) user.setUpdatedAt(updatedTs.toInstant());
         Timestamp suspendedTs = rs.getTimestamp("suspendedUntil");
         if (suspendedTs != null) user.setSuspendedUntil(suspendedTs.toInstant());
-        user.setCreatedBy((UUID) rs.getObject("createdBy"));
-        user.setUpdatedBy((UUID) rs.getObject("updatedBy"));
-        user.setSuspendedBy((UUID) rs.getObject("suspendedBy"));
+        String createdByStr = rs.getString("createdBy");
+        if (createdByStr != null) user.setCreatedBy(UUID.fromString(createdByStr));
+
+        String updatedByStr = rs.getString("updatedBy");
+        if (updatedByStr != null) user.setUpdatedBy(UUID.fromString(updatedByStr));
+
+        String suspendedByStr = rs.getString("suspendedBy");
+        if (suspendedByStr != null) user.setSuspendedBy(UUID.fromString(suspendedByStr));
         return user;
     }
 }

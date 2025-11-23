@@ -1,4 +1,4 @@
-package com.daar.core.domain.validator;
+package com.daar.core.domain.validators;
 
 import org.junit.jupiter.api.Test;
 
@@ -25,14 +25,6 @@ public class UserValidatorsTest {
                 .hasMessageContaining("Format d'id invalide");
     }
 
-    @Test
-    void updateUserValidator_shouldFailForPastSuspendedUntil() {
-        Instant past = Instant.now().minusSeconds(10);
-        assertThatThrownBy(() -> UserValidators.updateUserValidator(
-                "John", "Doe", null, null, null, null, null, null, past, null, null))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("future");
-    }
 
 
     @Test

@@ -16,10 +16,14 @@ public class Main {
                 "jdbc:postgresql://localhost:5432/users",
                 "sidi",
                 "marhaba",
-                "org.postgresql.Driver"
+                "org.postgresql.Driver",
+                10,
+                2,
+                30000,
+                30000
         );
 
-        DataSource ds = new AppDataSourceProvider(dbconfig).createDataSource();
+        DataSource ds = new AppDataSourceProvider(dbconfig).getDataSource();
 
         AppContext appContext = new AppContext(ds);
 

@@ -5,8 +5,8 @@ import com.daar.adapter.in.rest.auth.controller.handler.UserHandler;
 import com.daar.adapter.in.rest.auth.mapper.UserMapper;
 import com.daar.adapter.in.rest.auth.request.UpdateUserRequest;
 import com.daar.adapter.in.rest.auth.response.UserResponse;
-import com.daar.core.domain.validator.DateValidators;
-import com.daar.core.domain.validator.UserValidators;
+import com.daar.core.domain.validators.DateValidators;
+import com.daar.core.domain.validators.UserValidators;
 
 import com.daar.core.usecase.auth.dto.UserDTO;
 import com.daar.core.usecase.auth.usecase.UserUseCase;
@@ -78,21 +78,6 @@ public class UserController {
 
 
 
-    private void getByDatesHandler(Context ctx) throws ParseException {
-
-        String startStr = ctx.queryParam("start");
-        String endStr = ctx.queryParam("end");
-
-        assert startStr != null;
-        assert endStr != null;
-        DateValidators.validatePeriod(Instant.parse(startStr), Instant.parse(endStr));
-        Date start = DATE_FORMAT.parse(startStr);
-        Date end = DATE_FORMAT.parse(endStr);
-        List<UserDTO> dtoList = userHandler.getByDate(start, end);
-        List<UserResponse> response = UserMapper.toResponseList(dtoList);
-        ctx.json(response).status(200);
-    }
-
 
 
 
@@ -105,7 +90,6 @@ public class UserController {
         app.get("/users/{id}", this::getByIdHandler);
         app.get("/users", this::getAllHandler);
         app.get("/users/addedAfter", this::getByDateHandler);
-        app.get("/users/addedBetween", this::getByDatesHandler);
     }
 
 
